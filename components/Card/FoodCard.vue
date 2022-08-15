@@ -1,0 +1,97 @@
+<template>
+  <div class="container hover"
+    :style="{'background-image': 'linear-gradient('+gradientAngle+','+color1+','+color2+')'}"
+  >
+    <div class="image">
+        <img :src="imagePath" alt="">
+    </div>
+    <div class="caption">
+        <h2>{{title}}</h2>
+        <h3>{{subtitle}}</h3>
+    </div>
+    <div class="price">
+        <span>R${{price}}</span>
+        <van-icon name="add-o" class="hover" size="30"/>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+    
+    props:{
+        id: String,
+
+        imagePath: String,
+        title: String,
+        subtitle: String,
+        price: String,
+        
+        color1: String,
+        color2: String,
+        gradientAngle: String
+    }
+}
+</script>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap');
+
+.container{
+    width: 150px;
+    height: 210px;
+    /* background-color: #322d35; */
+    /* background-image: linear-gradient(225deg,#016640, #002215); */
+    border-radius: 10px;
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+}
+
+.hover:hover{
+    color:white;
+}
+
+.image{
+    width: 100%;
+}
+
+img{
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.caption{
+    margin-top: 5px;
+    color: white;
+}
+
+.caption h2, .caption h3{
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    line-height: 18px;
+}
+
+.caption h2{
+    font-size: 20px;
+}
+
+.caption h3{
+    font-size: 15px;
+    color: grey;
+}
+
+.price{
+    margin-top: 20px;
+    color: #016640;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price span{
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+}
+</style>
