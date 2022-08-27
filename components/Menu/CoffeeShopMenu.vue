@@ -2,11 +2,10 @@
     <div class="container">
         <div class="title">
             <h3>{{title}}</h3>
-            <NuxtLink style="text-decoration: none; color: inherit;" to="/foods"><van-icon name="arrow" alt="See More"/></NuxtLink>
+            <NuxtLink style="text-decoration: none; color: inherit;" :to="`/menu/${to}`"><van-icon name="arrow" alt="See More"/></NuxtLink>
         </div>
         <div class="content">
             <ProductsHorizontalScroll :content="content" :title="title" :color1="color1" :color2="color2" :gradientAngle="gradientAngle"/>
-            <!-- <h1 style="color:white;">{{content}}</h1> -->
         </div>
     </div>
 </template>
@@ -18,11 +17,12 @@ export default {
         ProductsHorizontalScroll
     },
     props:{
+        to: String,
         title: String,
         color1: String,
         color2: String,
         gradientAngle: String,
-        content: JSON
+        content: null
     },
     
 

@@ -1,19 +1,19 @@
 <template>
   <div class="container">
-    <MainHeader />
+    <!-- <ProductHeader /> -->
         <Nuxt />
-    <NavegationTabBar />
+
   </div>
 </template>
 
 <script>
-import MainHeader from '../components/Header/MainHeader.vue'
+import ProductHeader from '../components/Header/ProductHeader.vue'
 import NavegationTabBar from '../components/Navegation/NavegationTabBar.vue'
 
 export default {
-  name: '',
+  name: 'products',
   components: {
-    MainHeader,
+    ProductHeader,
     NavegationTabBar,
   
   }
@@ -22,7 +22,8 @@ export default {
 </script>
 <style scoped>
 body{
-  padding: 0px;
+  padding: 5px;
   background-color: #232026;
 }
+
 </style>

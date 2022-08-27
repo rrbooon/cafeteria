@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="content">
         <van-icon name="shopping-cart" size="30" @click="showPopup()"/>
         <van-popup
             v-model="show"
@@ -25,9 +25,8 @@
 <style scoped>
 
 
-.container{
+.content{
     color: white;
-
 }
 
 </style>

@@ -2,21 +2,28 @@
   <div class="container">
     <van-tabbar v-model="active">
       <van-tabbar-item replace to="/" icon="home-o">Home</van-tabbar-item>
-      <van-tabbar-item replace to="/foods" icon="search">Foods</van-tabbar-item>
-      <van-tabbar-item replace to="/drinks" icon="friends-o">Drinks</van-tabbar-item>
-      <van-tabbar-item replace to="/offers" icon="discount">Offers</van-tabbar-item>
-      <van-tabbar-item replace to="/foods" icon="setting-o">Settings</van-tabbar-item>
+      <van-tabbar-item replace to="/menu/foods" icon="search">Foods</van-tabbar-item>
+      <van-tabbar-item replace to="/menu/drinks" icon="friends-o">Drinks</van-tabbar-item>
+      <van-tabbar-item replace to="/menu/offers" icon="discount">Offers</van-tabbar-item>
+      <van-tabbar-item replace to="/menu/drinks" icon="setting-o">Settings</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'IndexPage',
   data() {
     return {
-      active: 0,
-    };
+      
+    }
   },
+  computed:{
+    ...mapState({
+        active: state => state.routes.active,
+    })
+  }
 }
 </script>
 <style scoped>

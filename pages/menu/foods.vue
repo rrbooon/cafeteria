@@ -1,15 +1,18 @@
 <template>
   <div class="container">
     <van-grid :border="false" :column-num="2">
-      <van-grid-item v-for="product in cardapio">
-        <FoodCard  :imagePath="product.imagePath" :title="product.title" :subtitle="product.subtitle" :price="product.price" :color1="'#1C7C54'" :color2="'#002215'" :gradientAngle="'225deg'"/>
+      <van-grid-item v-for="product in foods" :key="product._id">
+        <NuxtLink style="text-decoration: none; color: inherit;" :to="`/products/${product._id}`">  
+          <FoodCard :id="product._id" :imagePath="product.imagePath" :title="product.name" :subtitle="product.description" :price="product.basePrice" :color1="'#1C7C54'" :color2="'#002215'" :gradientAngle="'225deg'"/>
+        </NuxtLink>
       </van-grid-item>
     </van-grid>
   </div>
 </template>
 
 <script>
-import FoodCard from '../components/Card/FoodCard.vue'
+import FoodCard from '../../components/Card/FoodCard.vue'
+import { mapState } from 'vuex'
 
 const cardapio = [
 
@@ -58,13 +61,20 @@ export default {
   name: 'IndexPage',
   data(){
     return{
-      cardapio
+      cardapio,
     }
   },
   components: {
     FoodCard
-  }
-  
+  },
+  computed:{
+    ...mapState({
+        foods: state => state.products.foods,
+    })
+  },
+  beforeCreate(){
+    this.$store.dispatch('routes/setActivePage', 1)
+  }, 
 }
 </script>
 <style >

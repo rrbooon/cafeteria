@@ -1,15 +1,16 @@
 <template>
-  <div class="container">
+  <div class="container container_home">
     <UserLocationCard />
-    <CoffeeShopMenu :title="'FOODS'" :color1="'#1C7C54'" :color2="'#002215'" :gradientAngle="'225deg'" :content="cardapio.foods"/>
-    <CoffeeShopMenu :title="'DRINKS'" :color1="'#1C7C54'" :color2="'#002215'"  :gradientAngle="'250deg'" :content="cardapio.drinks"/>
-    <CoffeeShopMenu :title="'OFFERS'" :color1="'#1C7C54'" :color2="'#002215'"  :gradientAngle="'200deg'" :content="cardapio.offers" style="margin-bottom: 70px"/>
+    <CoffeeShopMenu v-if="foods" :to="'foods'" :title="'FOODS'" :color1="'#1C7C54'" :color2="'#002215'" :gradientAngle="'225deg'" :content="foods"/>
+    <CoffeeShopMenu v-if="drinks" :to="'drinks'" :title="'DRINKS'" :color1="'#1C7C54'" :color2="'#002215'"  :gradientAngle="'250deg'" :content="drinks"/>
+    <CoffeeShopMenu v-if="offers" :to="'offers'" :title="'OFFERS'" :color1="'#1C7C54'" :color2="'#002215'"  :gradientAngle="'200deg'" :content="offers" />
   </div>
 </template>
 
 <script>
 import UserLocationCard from '../components/Card/UserLocationCard.vue'
 import CoffeeShopMenu from '../components/Menu/CoffeeShopMenu.vue'
+import { mapState } from 'vuex'
 
 const cardapio = {
         "foods": [
@@ -120,22 +121,45 @@ const cardapio = {
 
 export default {
   name: 'IndexPage',
-  components: {
+  components: { 
     UserLocationCard,
-    CoffeeShopMenu
+    CoffeeShopMenu,
   },
   data(){
     return{
-      cardapio
+        teste:{},
+        cardapio
     }
+  },
+  computed:{
+    ...mapState({
+        foods: state => state.products.foods,
+        drinks: state => state.products.drinks,
+        offers: state => state.products.offers,
+    })
+  },
+  beforeCreate(){
+    this.$store.dispatch('products/getProducts');
+    this.$store.dispatch('routes/setActivePage', 0);
+  },
+  methods:{
+    
   }
-  
 }
+  
+
 </script>
+<style scoped>
+    .container_home{
+        padding-bottom: 80px;
+    }
+</style>
 <style>
+
 body{
-  padding: 5px;
-  background-color: #232026;
+    background-color: #232026;
 }
 
 </style>
+
+

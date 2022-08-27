@@ -3,15 +3,17 @@
     :style="{'background-image': 'linear-gradient('+gradientAngle+','+color1+','+color2+')'}"
   >
     <div class="image">
-        <img :src="imagePath" alt="">
+        <img :src="`http://localhost:1337/images/${imagePath}`" alt="">
     </div>
     <div class="caption">
         <h2>{{title}}</h2>
         <h3>{{subtitle}}</h3>
     </div>
     <div class="price">
-        <span>R${{price}}</span>
-        <van-icon name="add-o" class="hover" size="30"/>
+        <span>R${{price.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</span>
+        <NuxtLink style="text-decoration: none; color: inherit;" :to="`/products/add/${id}`"> 
+            <van-icon name="add-o" class="hover" size="30"/>
+        </NuxtLink>
     </div>
   </div>
 </template>
@@ -24,7 +26,7 @@ export default {
         imagePath: String,
         title: String,
         subtitle: String,
-        price: String,
+        price: Number,
         
         color1: String,
         color2: String,
@@ -57,6 +59,7 @@ export default {
 img{
     max-width: 100%;
     border-radius: 5px;
+    height: 84px;
 }
 
 .caption{
@@ -69,6 +72,9 @@ img{
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
     line-height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .caption h2{
