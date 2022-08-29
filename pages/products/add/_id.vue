@@ -4,7 +4,7 @@
             <van-icon name="arrow-left" />
         </div>
         <div class="image">
-            <img :src="`http://localhost:1337/images/${data.imagePath}`" alt="">
+            <img :src="`https://backendcafeteriaca.herokuapp.com/${data.imagePath}`" alt="">
         </div>
         <div class="content">
             <div class="title">
@@ -17,8 +17,8 @@
                 <div class="ingredients_form">
                     <div v-for="(item, index) in data.opitions" class="ingredients_form_item">
                         <p>{{item[1]}}</p>
-                        <p class="unit_Measurement">{{value[index]}}<span>g</span></p>
-                        <van-slider @change="setValue()" v-model="value[index]" :step="parseInt(item[4])" />
+                        <p class="unit_Measurement">{{value[index]}}<span>{{item[3]}}</span></p>
+                        <van-slider @change="setValue()" v-model="value[index]" :step="parseInt(item[5])" />
                     </div>
                 </div>
             </div>
@@ -30,8 +30,8 @@
                 <p v-else><span>R$</span> {{data.basePrice.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
             </div>
             <div class="btn_add">
-                <van-button color="linear-gradient(225deg, #1C7C54, #28512b)">
-                    Add Product
+                <van-button color="linear-gradient(225deg, #1C7C54, #28512b)" @click="addToCart">
+                    Add to cart
                 </van-button>
             </div>
         </div>
@@ -51,11 +51,11 @@
         async fetch(){
 
             try {
-                const data = await this.$axios.$get(`http://localhost:1337/product/get/${this.$route.params.id}`);
+                const data = await this.$axios.$get(`https://backendcafeteriaca.herokuapp.com/product/get/${this.$route.params.id}`);
                 this.data = data.product;
 
                 for (let index = 0; index < this.data.opitions.length; index++) {
-                    this.value[index] = parseInt(this.data.opitions[index][3]); 
+                    this.value[index] = parseInt(this.data.opitions[index][4]); 
                 }
             } catch (error) {
                 
@@ -79,9 +79,26 @@
                 }
                 
                 console.log(this.newValue);
-            }
-        }
+            },
+            addToCart(){
+                var value;
 
+                if (this.newValue) {
+                    value = this.newValue;
+                }else{
+                    value = this.data.basePrice;
+                }
+                
+
+                const payload ={
+                    data: this.data,
+                    opitions: this.value,
+                    finalValue: value
+                }
+                this.$store.dispatch('cart/addProduct', payload);
+            }
+        },
+        
     }
 </script>
 <style>

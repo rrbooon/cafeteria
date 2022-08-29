@@ -31,6 +31,7 @@ export default {
     width: 95%;
     margin-left: 2.5%;
     margin-top: 5%;
+    padding-right: 10px
 }
 
 .cart{

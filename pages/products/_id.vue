@@ -4,7 +4,7 @@
             <van-icon name="arrow-left" />
         </div>
         <div class="image">
-            <img :src="`http://localhost:1337/images/${data.imagePath}`" alt="">
+            <img :src="`https://backendcafeteriaca.herokuapp.com/${data.imagePath}`" alt="">
         </div>
         <div class="content">
             <div class="title">
@@ -54,7 +54,7 @@
         async fetch(){
 
             try {
-                const data = await this.$axios.$get(`http://localhost:1337/product/get/${this.$route.params.id}`);
+                const data = await this.$axios.$get(`https://backendcafeteriaca.herokuapp.com/product/get/${this.$route.params.id}`);
                 this.data = data.product;
             } catch (error) {
                 

@@ -14,54 +14,12 @@
 import FoodCard from '../../components/Card/FoodCard.vue'
 import { mapState } from 'vuex'
 
-const cardapio = [
-
-            {
-                "title": "Hamburguer1",
-                "subtitle": "Pão com carne 1",
-                "price": "30,00",
-                "imagePath":"/img/hamburguer.jpg"
-            },
-            {
-                "title": "Pão na chapa",
-                "subtitle": "with manteiga",
-                "price": "8,00",
-                "imagePath":"/img/hamburguer.jpg"
-            },
-            {
-                "title": "Donuts",
-                "subtitle": "with cream",
-                "price": "10,00",
-                "imagePath":"/img/hamburguer.jpg"
-            },
-            
-            {
-                "title": "Pão na chapa",
-                "subtitle": "with creamchesee",
-                "price": "5,00",
-                "imagePath":"/img/hamburguer.jpg"
-            },
-            {
-                "title": "Donuts",
-                "subtitle": "with chocolate",
-                "price": "15,00",
-                "imagePath":"/img/hamburguer.jpg"
-            },
-            {
-                "title": "Hamburguer2",
-                "subtitle": "Pão com carne 2",
-                "price": "60,00",
-                "imagePath":"/img/hamburguer.jpg"
-            }
-        
-]
-
 
 export default {
   name: 'IndexPage',
   data(){
     return{
-      cardapio,
+   
     }
   },
   components: {

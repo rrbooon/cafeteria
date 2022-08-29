@@ -18,7 +18,6 @@ export default {
   name: 'IndexPage',
   data(){
     return{
-      cardapio,
     }
   },
   components: {

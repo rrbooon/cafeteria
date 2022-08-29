@@ -3,7 +3,7 @@
     :style="{'background-image': 'linear-gradient('+gradientAngle+','+color1+','+color2+')'}"
   >
     <div class="image">
-        <img :src="`http://localhost:1337/images/${imagePath}`" alt="">
+        <img :src="`https://backendcafeteriaca.herokuapp.com/${imagePath}`" alt="">
     </div>
     <div class="caption">
         <h2>{{title}}</h2>
@@ -71,7 +71,7 @@ img{
     margin: 0;
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    line-height: 18px;
+    line-height: 25px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
