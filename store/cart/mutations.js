@@ -7,7 +7,8 @@ export default {
     },
 
     DELETE_PRODUCT(state, payload){
-        delete state.cart[payload]
+        state.finalValue -= state.cart[payload].finalValue;
+        delete state.cart[payload];
     }
     
 }
