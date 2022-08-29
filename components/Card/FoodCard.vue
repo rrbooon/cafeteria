@@ -3,7 +3,7 @@
     :style="{'background-image': 'linear-gradient('+gradientAngle+','+color1+','+color2+')'}"
   >
     <div class="image">
-        <img :src="`https://backendcafeteriaca.herokuapp.com/${imagePath}`" alt="">
+        <img :src="`https://backendcafeteriaca.herokuapp.com/images/${imagePath}`" alt="">
     </div>
     <div class="caption">
         <h2>{{title}}</h2>

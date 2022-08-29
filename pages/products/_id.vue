@@ -4,7 +4,7 @@
             <van-icon name="arrow-left" />
         </div>
         <div class="image">
-            <img :src="`https://backendcafeteriaca.herokuapp.com/${data.imagePath}`" alt="">
+            <img :src="`https://backendcafeteriaca.herokuapp.com/images/${data.imagePath}`" alt="">
         </div>
         <div class="content">
             <div class="title">

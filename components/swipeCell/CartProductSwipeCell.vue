@@ -6,7 +6,7 @@
             :desc="data.data.description"
             :title="data.data.name"
             class="goods-card"
-            :thumb="`https://backendcafeteriaca.herokuapp.com/${data.data.imagePath}`"
+            :thumb="`https://backendcafeteriaca.herokuapp.com/images/${data.data.imagePath}`"
         />
         <template #right>
             <van-button square type="danger" text="Delete" />
