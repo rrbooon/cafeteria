@@ -26,8 +26,8 @@
         <div class="footerBar">
             <div class="price">
                 <h5>Price</h5>
-                <p v-if="newValue"><span>R$</span> {{newValue.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
-                <p v-else><span>R$</span> {{data.basePrice.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
+                <p v-if="newValue" translate="no"><span translate="no">R$</span> {{newValue.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
+                <p v-else translate="no"><span translate="no">R$</span> {{data.basePrice.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
             </div>
             <div class="btn_add">
                 <van-button color="linear-gradient(225deg, #1C7C54, #28512b)" @click="addToCart">
@@ -51,7 +51,7 @@
         async fetch(){
 
             try {
-                const data = await this.$axios.$get(`https://backendcafeteriaca.herokuapp.com/product/get/${this.$route.params.id}`);
+                const data = await this.$axios.$get(`product/get/${this.$route.params.id}`);
                 this.data = data.product;
 
                 for (let index = 0; index < this.data.opitions.length; index++) {

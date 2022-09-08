@@ -54,7 +54,7 @@
         async fetch(){
 
             try {
-                const data = await this.$axios.$get(`https://backendcafeteriaca.herokuapp.com/product/get/${this.$route.params.id}`);
+                const data = await this.$axios.$get(`product/get/${this.$route.params.id}`);
                 this.data = data.product;
             } catch (error) {
                 

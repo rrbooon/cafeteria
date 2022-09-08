@@ -1,12 +1,13 @@
 <template>
   <div class="container">
-    <van-grid :border="false" :column-num="2">
+    <van-grid :border="false" :column-num="2" v-if="foods.length > 0">
       <van-grid-item v-for="product in foods" :key="product._id">
         <NuxtLink style="text-decoration: none; color: inherit;" :to="`/products/${product._id}`">  
           <FoodCard :id="product._id" :imagePath="product.imagePath" :title="product.name" :subtitle="product.description" :price="product.basePrice" :color1="'#1C7C54'" :color2="'#002215'" :gradientAngle="'225deg'"/>
         </NuxtLink>
       </van-grid-item>
     </van-grid>
+    <van-loading size="24px" v-else vertical>Loading...</van-loading>
   </div>
 </template>
 
@@ -31,6 +32,7 @@ export default {
     })
   },
   beforeCreate(){
+    this.$store.dispatch('products/getProducts');
     this.$store.dispatch('routes/setActivePage', 1)
   }, 
 }

@@ -8,8 +8,8 @@
                     <div class="footerBar">
                         <div class="price">
                             <h5>Price</h5>
-                            <p v-if="finalValue"><span>R$</span>{{finalValue.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
-                            <p v-else><span>R$</span> 0,00</p>
+                            <p v-if="finalValue" translate="no"><span translate="no">R$</span>{{finalValue.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
+                            <p v-else translate="no"><span translate="no">R$</span> 0,00</p>
                         </div>
                         <div class="btn_add">
                             <van-button color="linear-gradient(225deg, rgb(32 223 143), rgb(0 0 0))" @click="closeOrder">

@@ -5,7 +5,8 @@
             <NuxtLink style="text-decoration: none; color: inherit;" :to="`/menu/${to}`"><van-icon name="arrow" alt="See More"/></NuxtLink>
         </div>
         <div class="content">
-            <ProductsHorizontalScroll :content="content" :title="title" :color1="color1" :color2="color2" :gradientAngle="gradientAngle"/>
+            <ProductsHorizontalScroll v-if="content.length > 0" :content="content" :title="title" :color1="color1" :color2="color2" :gradientAngle="gradientAngle"/>
+            <van-loading v-else size="24px" vertical>Loading...</van-loading>
         </div>
     </div>
 </template>

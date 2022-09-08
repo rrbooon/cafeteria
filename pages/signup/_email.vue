@@ -1,20 +1,29 @@
 <template>
     <div class="container_index">
+        <div class="back_button" @click="back">
+            <van-icon name="arrow-left" />
+        </div>
         <div class="image_background">
             <img src="/img/cafe.jpg" alt="">
         </div>
         <div class="title">
-            <h1>Hello!</h1>
+            <h1>Sign-up!</h1>
         </div>
-        <LoggedOutCardEntrie />
+        <SingupCardForm />
     </div>
 </template>
 <script>
-import LoggedOutCardEntrie from '../components/Card/LoggedOutCardEntrie.vue'
+import SingupCardForm from '../../components/Card/SingupCardForm.vue'
 export default {
     layout: 'LoggedOut',
     components:{
-        LoggedOutCardEntrie
+        SingupCardForm,
+
+    },
+    methods:{
+        back(){
+            this.$router.back()
+        }
     }
 }
 </script>
@@ -28,7 +37,8 @@ export default {
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        padding-top: 60%;
+        padding-top: 40%;
+        padding-bottom: 15%;
     }
 
     .image_background{
@@ -56,4 +66,17 @@ export default {
         color: white;
     }
     
+    .back_button{
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 40px;
+        left: 21px;
+        backdrop-filter: blur( 7px );
+        color: white;
+    }
 </style>

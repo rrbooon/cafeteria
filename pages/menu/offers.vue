@@ -32,6 +32,7 @@ export default {
     })
   },
   beforeCreate(){
+    this.$store.dispatch('products/getProducts');
     this.$store.dispatch('routes/setActivePage', 3)
   }, 
 }

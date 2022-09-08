@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <van-tabbar v-model="active">
-      <van-tabbar-item replace to="/" icon="home-o">Home</van-tabbar-item>
+      <van-tabbar-item replace to="/home" icon="home-o">Home</van-tabbar-item>
       <van-tabbar-item replace to="/menu/foods" icon="search">Foods</van-tabbar-item>
       <van-tabbar-item replace to="/menu/drinks" icon="friends-o">Drinks</van-tabbar-item>
       <van-tabbar-item replace to="/menu/offers" icon="discount">Offers</van-tabbar-item>
