@@ -88,7 +88,7 @@ img{
 
 .price{
     margin-top: 20px;
-    color: #016640;
+    color: #312b25;
     display: flex;
     justify-content: space-between;
     align-items: center;

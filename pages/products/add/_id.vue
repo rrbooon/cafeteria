@@ -4,7 +4,8 @@
             <van-icon name="arrow-left" />
         </div>
         <div class="image">
-            <img :src="`https://backendcafeteriaca.herokuapp.com/images/${data.imagePath}`" alt="">
+            <img src="/img/massa.jpeg" class="massa" alt="">
+            <img src="/img/recheio.png"  class="recheio" alt="">
         </div>
         <div class="content">
             <div class="title">
@@ -30,7 +31,7 @@
                 <p v-else translate="no"><span translate="no">R$</span> {{data.basePrice.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
             </div>
             <div class="btn_add">
-                <van-button color="linear-gradient(225deg, #1C7C54, #28512b)" @click="addToCart">
+                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" @click="addToCart">
                     Add to cart
                 </van-button>
             </div>
@@ -102,15 +103,28 @@
     }
 </script>
 <style>
-body{
-    background-color: #232026;
-}
 .van-slider__bar{
-        background-image: linear-gradient(to right,#1C7C54, #002215);
+        background-image: linear-gradient(to right,#c7b199, #c7b199);
     }
 </style>
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap');
+    
+
+    .massa{
+        width: 100%;
+        /* position: absolute; */
+        position: absolute;
+        top: 97px;
+    }
+
+    .recheio{
+        width: 85%;
+        /* height: 75%; */
+        z-index: 10;
+        position: absolute;
+        top: 110px;
+    }
 
     .image{
         border-radius: 30px 30px 15px 15px;
@@ -130,7 +144,7 @@ body{
     }
     .footerBar{
         overflow: hidden;
-        color: white;
+        color: black;
         position: fixed;
         bottom: 30px;
         width: 100%;
@@ -153,7 +167,7 @@ body{
         font-family: 'Oswald', sans-serif;
         font-weight: 700;
         font-size: 30px;
-        color: white;
+        color: black;
     }
 
     .description .descriptionSubtitle h5, .ingredients .ingredientsSubtitle h5{
@@ -165,7 +179,7 @@ body{
     }
 
     .description .descriptionContent p{
-        color: whitesmoke;
+        color: black;
         font-family:courier,arial,helvetica;
     }
 
@@ -174,7 +188,7 @@ body{
     }
 
     .ingredients_form .ingredients_form_item p{
-        color: whitesmoke;
+        color: black;
         font-family:courier,arial,helvetica;
         margin-bottom:5px;
     }
@@ -187,7 +201,7 @@ body{
     }
     
     .footerBar .price p span{
-        color: #1C7C54;
+        color: #c7b199;
     }
 
     .price{
@@ -219,7 +233,7 @@ body{
         top: 40px;
         left: 21px;
         backdrop-filter: blur( 7px );
-        color: white;
+        color: black;
     }
 
     .unit_Measurement{

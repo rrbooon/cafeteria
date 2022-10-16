@@ -35,7 +35,7 @@
                 <p><span>R$</span> {{data.basePrice.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
             </div>
             <div class="btn_add">
-                <van-button color="linear-gradient(225deg, #1C7C54, #28512b)" :to="`/products/add/${data._id}`">
+                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" :to="`/products/add/${data._id}`">
                     Add Product
                 </van-button>
             </div>
@@ -71,11 +71,6 @@
 
     }
 </script>
-<style>
-body{
-    background-color: #232026;
-}
-</style>
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap');
 
@@ -97,7 +92,7 @@ body{
     }
     .footerBar{
         overflow: hidden;
-        color: white;
+        color: black;
         position: fixed;
         bottom: 30px;
         width: 100%;
@@ -120,7 +115,7 @@ body{
         font-family: 'Oswald', sans-serif;
         font-weight: 700;
         font-size: 30px;
-        color: white;
+        color: black;
     }
 
     .description .descriptionSubtitle h5, .ingredients .ingredientsSubtitle h5{
@@ -132,7 +127,7 @@ body{
     }
 
     .description .descriptionContent p{
-        color: whitesmoke;
+        color: black;
         font-family:courier,arial,helvetica;
     }
 
@@ -141,7 +136,7 @@ body{
     }
 
     .ingredientsContent li{
-        color: whitesmoke;
+        color: black;
         font-family:courier,arial,helvetica;
     }
 
@@ -153,7 +148,7 @@ body{
     }
     
     .footerBar .price p span{
-        color: #1C7C54;
+        color: #c7b199;
     }
 
     .price{
@@ -185,6 +180,6 @@ body{
         top: 40px;
         left: 21px;
         backdrop-filter: blur( 7px );
-        color: white;
+        color: black;
     }
 </style>

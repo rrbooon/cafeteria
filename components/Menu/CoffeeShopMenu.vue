@@ -41,14 +41,14 @@ export default {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    color: white;
+    color: black;
     align-items: center;
 }
 
 .title h3{
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    color: white;
+    color: black;
     margin-left: 5px;
 }
 

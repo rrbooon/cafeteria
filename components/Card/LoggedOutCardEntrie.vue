@@ -58,7 +58,7 @@ export default {
     width: 80%;
 }
 
-.or{
+p{
     color: white;
     z-index: 10;
     font-family: 'Oswald', sans-serif;

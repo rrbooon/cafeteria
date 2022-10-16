@@ -1,14 +1,26 @@
 <template>
   <div class="container container_home">
-    <UserLocationCard />
-    <CoffeeShopMenu v-if="foods" :to="'foods'" :title="'FOODS'" :color1="'#1C7C54'" :color2="'#002215'" :gradientAngle="'225deg'" :content="foods"/>
-    <CoffeeShopMenu v-if="drinks" :to="'drinks'" :title="'DRINKS'" :color1="'#1C7C54'" :color2="'#002215'"  :gradientAngle="'250deg'" :content="drinks"/>
-    <CoffeeShopMenu v-if="offers" :to="'offers'" :title="'OFFERS'" :color1="'#1C7C54'" :color2="'#002215'"  :gradientAngle="'200deg'" :content="offers" />
+    <header>
+        <div class="header">
+            <h1>Bem-vindo.</h1>
+            <img src="/img/icons/java.png" style="max-height:60px" alt="">
+        </div>
+        <div class="header coffee-shop-name">
+            <h1>(cafe name)</h1>
+        </div>
+        <div class="header coffee-shop-name">
+            <h1>(cafe logo)</h1>
+        </div>
+    </header>
+    <main>
+        <div class="offers">
+            <CoffeeShopMenu v-if="foods" :to="'foods'" :title="'Promoções'" :color1="'#c7b199'" :color2="'#c7b199'" :gradientAngle="'225deg'" :content="foods"/>
+        </div>
+    </main>
   </div>
 </template>
 
 <script>
-import UserLocationCard from '../components/Card/UserLocationCard.vue'
 import CoffeeShopMenu from '../components/Menu/CoffeeShopMenu.vue'
 import { mapState } from 'vuex'
 
@@ -122,8 +134,7 @@ const cardapio = {
 export default {
   name: 'IndexPage',
   components: { 
-    UserLocationCard,
-    CoffeeShopMenu,
+    CoffeeShopMenu
   },
   data(){
     return{
@@ -153,13 +164,22 @@ export default {
     .container_home{
         padding-bottom: 80px;
     }
-</style>
-<style>
 
-body{
-    background-color: #232026;
-}
+    .header{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-top: 10rem;
+    }
 
+    .coffee-shop-name{
+        padding-top: 3rem;
+    }
+
+    .offers{
+        padding-top: 5rem;
+    }
 </style>
+
 
 
