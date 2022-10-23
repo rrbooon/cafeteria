@@ -3,10 +3,10 @@
     <van-tabbar v-model="active">
       <van-tabbar-item replace to="/home"><img src="/img/icons/home.svg" alt=""></van-tabbar-item>
       <van-tabbar-item replace to="/menu/foods"><img src="/img/icons/search.svg" alt=""></van-tabbar-item>
-      <van-tabbar-item replace to="/menu/drinks"><img src="/img/icons/offer.svg" alt=""></van-tabbar-item>
-      <van-tabbar-item replace to="/menu/offers"><img src="/img/icons/lanche.svg" alt=""></van-tabbar-item>
+      <van-tabbar-item replace to="/menu/offers"><img src="/img/icons/offer.svg" alt=""></van-tabbar-item>
+      <van-tabbar-item replace to="/menu/foods"><img src="/img/icons/lanche.svg" alt=""></van-tabbar-item>
       <van-tabbar-item replace to="/menu/drinks"><img src="/img/icons/bebida.svg" alt=""></van-tabbar-item>
-      <van-tabbar-item replace to="/menu/drinks"><img src="/img/icons/carrinho.svg" alt=""></van-tabbar-item>
+      <van-tabbar-item replace to="/menu/cart"><img src="/img/icons/carrinho.svg" alt=""></van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
