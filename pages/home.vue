@@ -6,10 +6,10 @@
             <img src="/img/icons/java.png" style="max-height:60px" alt="">
         </div>
         <div class="header coffee-shop-name">
-            <h1>(cafe name)</h1>
+            <h1>Inoffe Café</h1>
         </div>
         <div class="header coffee-shop-name">
-            <h1>(cafe logo)</h1>
+            <img src="/logo.png" alt="" id="logo">
         </div>
     </header>
     <main>
@@ -161,6 +161,11 @@ export default {
 
 </script>
 <style scoped>
+    #logo{
+        width: 100%;
+        margin: auto;
+    }
+
     .container_home{
         padding-bottom: 80px;
     }
@@ -169,15 +174,15 @@ export default {
         width: 100%;
         display: flex;
         justify-content: center;
-        padding-top: 10rem;
+        padding-top: 5rem;
     }
 
     .coffee-shop-name{
-        padding-top: 3rem;
+        padding-top: 1rem;
     }
 
     .offers{
-        padding-top: 5rem;
+        padding-top: 1rem;
     }
 </style>
 
