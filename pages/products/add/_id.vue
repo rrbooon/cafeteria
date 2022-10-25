@@ -15,6 +15,11 @@
                 <div class="ingredientsSubtitle">
                     <h5>Ingredients</h5>
                 </div>
+                <div class="default_options">
+                    <van-button round color="#c7b199" size="normal" type="primary">P</van-button>
+                    <van-button round color="#c7b199" size="normal" type="primary">M</van-button>
+                    <van-button round color="#c7b199" size="normal" type="primary">G</van-button>
+                </div>
                 <div class="ingredients_form">
                     <div v-for="(item, index) in data.opitions" class="ingredients_form_item">
                         <p>{{item[1]}}</p>
@@ -110,6 +115,10 @@
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap');
     
+    .default_options{
+        display: flex;
+        justify-content: space-around;
+    }
 
     .massa{
         width: 100%;
@@ -216,7 +225,7 @@
         width: 60%;
     }
 
-    .van-button{
+    .btn_add .van-button{
         width: 100%;
         border-radius: 10px;
         height: 50px;
