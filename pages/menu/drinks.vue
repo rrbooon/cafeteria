@@ -3,8 +3,8 @@
     <h1>Bebidas</h1>
     <van-grid :border="false" :column-num="2">
       <van-grid-item v-for="product in foods" :key="product._id">
-        <NuxtLink style="text-decoration: none; color: inherit;" :to="`/products/${product._id}`">  
-          <FoodCard :id="product._id" :imagePath="product.imagePath" :title="product.name" :subtitle="product.description" :price="product.basePrice" :color1="'#c7b199'" :color2="'#c7b199'" :gradientAngle="'225deg'"/>
+        <NuxtLink style="text-decoration: none; color: inherit;" :to="`/products/${product.item}/${product._id}`">  
+          <FoodCard :id="product._id" :imagePath="product.imagePath" :item="product.item" :title="product.name" :subtitle="product.description" :price="product.basePrice" :color1="'#c7b199'" :color2="'#c7b199'" :gradientAngle="'225deg'"/>
         </NuxtLink>
       </van-grid-item>
     </van-grid>

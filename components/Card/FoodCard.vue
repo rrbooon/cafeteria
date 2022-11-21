@@ -11,7 +11,7 @@
     </div>
     <div class="price">
         <span>R${{price.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</span>
-        <NuxtLink style="text-decoration: none; color: inherit;" :to="`/products/add/${id}`"> 
+        <NuxtLink style="text-decoration: none; color: inherit;" :to="`/products/${item}/add/${id}`"> 
             <van-icon name="add-o" class="hover" size="30"/>
         </NuxtLink>
     </div>
@@ -22,7 +22,7 @@ export default {
     
     props:{
         id: String,
-
+        item: String,
         imagePath: String,
         title: String,
         subtitle: String,
