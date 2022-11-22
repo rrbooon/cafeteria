@@ -17,38 +17,38 @@
                     <h5>Ingredients</h5>
                 </div>
                 <div class="default_options">
-                    <van-button round color="#c7b199" size="normal" type="primary">P</van-button>
-                    <van-button round color="#c7b199" size="normal" type="primary">M</van-button>
-                    <van-button round color="#c7b199" size="normal" type="primary">G</van-button>
+                    <van-button round :color="size[1]" size="normal" @click="setSize(p, 1)" type="primary">P</van-button>
+                    <van-button round :color="size[2]" size="normal" @click="setSize(m, 2)" type="primary">M</van-button>
+                    <van-button round :color="size[3]" size="normal" @click="setSize(g, 3)" type="primary">G</van-button>
                 </div>
                 <div class="ingredients_form">
                     <div class="ingredients_form_item">
                         <p>Café</p>
                         <p class="unit_Measurement">{{cafe.quantity}}<span>ml</span></p>
                         <div class="default_options">
-                            <van-button round color="#c7b199" size="normal" @click="setCafe(150, 0.75)" type="primary">P</van-button>
-                            <van-button round color="#c7b199" size="normal" @click="setCafe(300, 1.50)" type="primary">M</van-button>
-                            <van-button round color="#c7b199" size="normal" @click="setCafe(500, 2)" type="primary">G</van-button>
+                            <van-button round :color="cafe.selected[1]" size="normal" @click="setCafe(150, 0.75, 1)" type="primary">P</van-button>
+                            <van-button round :color="cafe.selected[2]" size="normal" @click="setCafe(300, 1.50, 2)" type="primary">M</van-button>
+                            <van-button round :color="cafe.selected[3]" size="normal" @click="setCafe(500, 2, 3)" type="primary">G</van-button>
                         </div>
                     </div>
                     <div class="ingredients_form_item">
                         <p>Chocolate</p>
                         <p class="unit_Measurement">{{chocolate.quantity}}<span>g</span></p>
-                        <van-slider @change="setValue()" v-model="chocolate.quantity" :min="0" :max="90"/>
+                        <van-slider @change="setValue(); unsetSize();" v-model="chocolate.quantity" :min="0" :max="90"/>
                     </div>
                     <div class="ingredients_form_item">
                         <p>Chantilly</p>
                         <p class="unit_Measurement">{{chantilly.quantity}}<span>ml</span></p>
-                        <van-slider @change="setValue()" v-model="chantilly.quantity" :min="0" :max="82"/>
+                        <van-slider @change="setValue();  unsetSize();" v-model="chantilly.quantity" :min="0" :max="82"/>
                     </div>
                     <div class="ingredients_form_item">
                         <p>Açúcar</p>
                         <p class="unit_Measurement">{{acucar.quantity}}<span> colheres de chá</span></p>
                         <div class="default_options">
-                            <van-button round color="#c7b199" size="normal" @click="setAcucar(1, 0.02)" type="primary">1</van-button>
-                            <van-button round color="#c7b199" size="normal" @click="setAcucar(2, 0.04)" type="primary">2</van-button>
-                            <van-button round color="#c7b199" size="normal" @click="setAcucar(3, 0.06)" type="primary">3</van-button>
-                            <van-button round color="#c7b199" size="normal" @click="setAcucar(4, 0.08)" type="primary">4</van-button>
+                            <van-button round :color="acucar.selected[1]" size="normal" @click="setAcucar(1, 0.02, 1)" type="primary">1</van-button>
+                            <van-button round :color="acucar.selected[2]" size="normal" @click="setAcucar(2, 0.04, 2)" type="primary">2</van-button>
+                            <van-button round :color="acucar.selected[3]" size="normal" @click="setAcucar(3, 0.06, 3)" type="primary">3</van-button>
+                            <van-button round :color="acucar.selected[4]" size="normal" @click="setAcucar(4, 0.08, 4)" type="primary">4</van-button>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                 <p translate="no"><span translate="no">R$</span> {{newValue.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
             </div>
             <div class="btn_add">
-                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" @click="addToCart">
+                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" @click="addToCart()">
                     Add to cart
                 </van-button>
             </div>
@@ -75,7 +75,12 @@
             return{
                 cafe: {
                     quantity: 150,
-                    price: 0.75
+                    price: 0.75,
+                    selected:{
+                        1: '#8e7e6d',
+                        2: '#c7b199',
+                        3: '#c7b199'
+                    }
                 },
                 chocolate: {
                     quantity: 32,
@@ -87,7 +92,105 @@
                 },
                 acucar: {
                     quantity: 1,
-                    price: 0.02
+                    price: 0.02,
+                    selected:{
+                        1: '#8e7e6d',
+                        2: '#c7b199',
+                        3: '#c7b199',
+                        4: '#c7b199'
+                    }
+                },
+                p:{
+                    cafe: {
+                        quantity: 150,
+                        price: 0.75,
+                        selected:{
+                            1: '#8e7e6d',
+                            2: '#c7b199',
+                            3: '#c7b199'
+                        }
+                    },
+                    chocolate: {
+                        quantity: 32,
+                        price: 0.0505
+                    },
+                    chantilly:{
+                        quantity: 25,
+                        price: 0.025
+                    },
+                    acucar: {
+                        quantity: 1,
+                        price: 0.02,
+                        selected:{
+                            1: '#8e7e6d',
+                            2: '#c7b199',
+                            3: '#c7b199',
+                            4: '#c7b199'
+                        }
+                    }
+                },
+                m:{
+                    cafe: {
+                        quantity: 300,
+                        price: 1.50,
+                        selected:{
+                            1: '#c7b199',
+                            2: '#8e7e6d',
+                            3: '#c7b199'
+                        }
+                    },
+                    chocolate: {
+                        quantity: 50,
+                        price: 0.0505
+                    },
+                    chantilly:{
+                        quantity: 33,
+                        price: 0.025
+                    },
+                    acucar: {
+                        quantity: 2,
+                        price: 0.04,
+                        selected:{
+                            1: '#c7b199',
+                            2: '#8e7e6d',
+                            3: '#c7b199',
+                            4: '#c7b199'
+                        }
+                    }
+                },
+                g:{
+                    cafe: {
+                        quantity: 500,
+                        price: 2,
+                        selected:{
+                            1: '#c7b199',
+                            2: '#c7b199',
+                            3: '#8e7e6d'
+                        }
+                    },
+                    chocolate: {
+                        quantity: 66,
+                        price: 0.0505
+                    },
+                    chantilly:{
+                        quantity: 67,
+                        price: 0.025
+                    },
+                    acucar: {
+                        quantity: 4,
+                        price: 0.08,
+                        selected:{
+                            1: '#c7b199',
+                            2: '#c7b199',
+                            3: '#c7b199',
+                            4: '#8e7e6d'
+                        }
+                    }
+                },
+                size:{
+                    1: '#8e7e6d',
+                    2: '#c7b199',
+                    3: '#c7b199'
                 },
                 newValue: 3
             }
@@ -95,6 +198,43 @@
         methods:{
             back(){
                 this.$router.back()
+            },
+            setSize(data, selected){
+                this.cafe = data.cafe
+
+                this.chocolate.quantity = data.chocolate.quantity
+
+                this.chantilly.quantity = data.chantilly.quantity
+
+
+                this.acucar = data.acucar
+
+                switch (selected) {
+                    case 1:
+                        this.size[1] = '#8e7e6d'
+                        this.size[2] = '#c7b199'
+                        this.size[3] = '#c7b199'
+                        
+                        break;
+                    case 2:
+                        this.size[1] = '#c7b199'
+                        this.size[2] = '#8e7e6d'
+                        this.size[3] = '#c7b199'
+                        break;
+                    case 3:
+                        this.size[1] = '#c7b199'
+                        this.size[2] = '#c7b199'
+                        this.size[3] = '#8e7e6d'
+                        break;
+                }
+                
+
+                this.setValue()
+            },
+            unsetSize(){
+                this.size[1] = '#c7b199'
+                this.size[2] = '#c7b199'
+                this.size[3] = '#c7b199'
             },
             setValue(){
                 const cafePrice = this.cafe.price
@@ -104,23 +244,91 @@
 
                 this.newValue = cafePrice + chocolatePrice + chantillyPrice + acucarPrice
             },
-            setCafe(quantity, price){
+            setCafe(quantity, price, selected){
                 this.cafe.quantity = quantity
                 this.cafe.price = price   
                 this.setValue()
+
+                switch (selected) {
+                    case 1:
+                        this.cafe.selected[1] = '#8e7e6d'
+                        this.cafe.selected[2] = '#c7b199'
+                        this.cafe.selected[3] = '#c7b199'
+                        
+                        break;
+                    case 2:
+                        this.cafe.selected[1] = '#c7b199'
+                        this.cafe.selected[2] = '#8e7e6d'
+                        this.cafe.selected[3] = '#c7b199'
+                        break;
+                    case 3:
+                        this.cafe.selected[1] = '#c7b199'
+                        this.cafe.selected[2] = '#c7b199'
+                        this.cafe.selected[3] = '#8e7e6d'
+                        break;
+                }
             },
-            setAcucar(quantity, price){
+            setAcucar(quantity, price, selected){
                 this.acucar.quantity = quantity
                 this.acucar.price = price   
                 this.setValue()
+
+                switch (selected) {
+                    case 1:
+                        this.acucar.selected[1] = '#8e7e6d'
+                        this.acucar.selected[2] = '#c7b199'
+                        this.acucar.selected[3] = '#c7b199'
+                        this.acucar.selected[4] = '#c7b199'
+                        
+                        break;
+                    case 2:
+                        this.acucar.selected[1] = '#c7b199'
+                        this.acucar.selected[2] = '#8e7e6d'
+                        this.acucar.selected[3] = '#c7b199'
+                        this.acucar.selected[4] = '#c7b199'
+                        break;
+                    case 3:
+                        this.acucar.selected[1] = '#c7b199'
+                        this.acucar.selected[2] = '#c7b199'
+                        this.acucar.selected[3] = '#8e7e6d'
+                        this.acucar.selected[4] = '#c7b199'
+                        break;
+                    case 4:
+                        this.acucar.selected[1] = '#c7b199'
+                        this.acucar.selected[2] = '#c7b199'
+                        this.acucar.selected[3] = '#c7b199'
+                        this.acucar.selected[4] = '#8e7e6d'
+                        break;
+                }
             },
             addToCart(){
                 
 
                 const payload ={
-                    data: null,
-                    opitions: null,
-                    finalValue: null
+                    name: 'Frappuccino',
+                    opitions: {
+                        cafe: {
+                            name: 'Café',
+                            quantity:this.cafe.quantity,
+                            unity: 'ml'                            
+                        },
+                        chocolate: {
+                            name: 'Chocolate',
+                            quantity:this.chocolate.quantity,
+                            unity: 'g'                            
+                        },
+                        chantilly: {
+                            name: 'Chantilly',
+                            quantity:this.chantilly.quantity,
+                            unity: 'ml'                            
+                        },
+                        acucar: {
+                            name: 'Açúcar',
+                            quantity:this.acucar.quantity,
+                            unity: ''                            
+                        },
+                    },
+                    finalValue: this.newValue
                 }
                 this.$store.dispatch('cart/addProduct', payload);
             }

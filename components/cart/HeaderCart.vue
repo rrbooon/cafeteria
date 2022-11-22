@@ -4,7 +4,7 @@
             <van-icon name="shopping-cart" size="30" @click="showPopup()"/>
             <van-action-sheet v-model="show" title="Cart" style="background-color: #232026; color:white; height: 70%;">
                 <div class="content">
-                    <CartProductSwipeCell v-if="cart" v-for="(item, index) in cart" :key="index" :data="item" :id="index"/>
+                    <CartProductSwipeCell  v-for="(item, index) in cart" :key="index" :data="item" :id="index"/>
                     <div class="footerBar">
                         <div class="price">
                             <h5>Price</h5>
