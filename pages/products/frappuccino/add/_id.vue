@@ -1,5 +1,5 @@
 <template>
-    <div v-if="data" class="container">
+    <div class="container">
         <div class="back_button" @click="back">
             <van-icon name="arrow-left" />
         </div>
@@ -10,7 +10,7 @@
         </div>
         <div class="content">
             <div class="title">
-                <h1>{{data.name}}</h1>
+                <h1>Frapuccino</h1>
             </div>
             <div class="ingredients">
                 <div class="ingredientsSubtitle">
@@ -22,10 +22,34 @@
                     <van-button round color="#c7b199" size="normal" type="primary">G</van-button>
                 </div>
                 <div class="ingredients_form">
-                    <div v-for="(item, index) in data.opitions" :key="index" class="ingredients_form_item">
-                        <p>{{item[1]}}</p>
-                        <p class="unit_Measurement">{{value[index]}}<span>{{item[3]}}</span></p>
-                        <van-slider @change="setValue()" v-model="value[index]" :step="parseInt(item[5])" />
+                    <div class="ingredients_form_item">
+                        <p>Café</p>
+                        <p class="unit_Measurement">{{cafe.quantity}}<span>ml</span></p>
+                        <div class="default_options">
+                            <van-button round color="#c7b199" size="normal" @click="setCafe(150, 0.75)" type="primary">P</van-button>
+                            <van-button round color="#c7b199" size="normal" @click="setCafe(300, 1.50)" type="primary">M</van-button>
+                            <van-button round color="#c7b199" size="normal" @click="setCafe(500, 2)" type="primary">G</van-button>
+                        </div>
+                    </div>
+                    <div class="ingredients_form_item">
+                        <p>Chocolate</p>
+                        <p class="unit_Measurement">{{chocolate.quantity}}<span>g</span></p>
+                        <van-slider @change="setValue()" v-model="chocolate.quantity" :min="0" :max="90"/>
+                    </div>
+                    <div class="ingredients_form_item">
+                        <p>Chantilly</p>
+                        <p class="unit_Measurement">{{chantilly.quantity}}<span>ml</span></p>
+                        <van-slider @change="setValue()" v-model="chantilly.quantity" :min="0" :max="82"/>
+                    </div>
+                    <div class="ingredients_form_item">
+                        <p>Açúcar</p>
+                        <p class="unit_Measurement">{{acucar.quantity}}<span> colheres de chá</span></p>
+                        <div class="default_options">
+                            <van-button round color="#c7b199" size="normal" @click="setAcucar(1, 0.02)" type="primary">1</van-button>
+                            <van-button round color="#c7b199" size="normal" @click="setAcucar(2, 0.04)" type="primary">2</van-button>
+                            <van-button round color="#c7b199" size="normal" @click="setAcucar(3, 0.06)" type="primary">3</van-button>
+                            <van-button round color="#c7b199" size="normal" @click="setAcucar(4, 0.08)" type="primary">4</van-button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -33,8 +57,8 @@
         <div class="footerBar">
             <div class="price">
                 <h5>Price</h5>
-                <p v-if="newValue" translate="no"><span translate="no">R$</span> {{newValue.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
-                <p v-else translate="no"><span translate="no">R$</span> {{data.basePrice.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
+                <p v-if="newValue" translate="no"><span translate="no">R$</span> {{'10'.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
+                <p v-else translate="no"><span translate="no">R$</span> {{'10'.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
             </div>
             <div class="btn_add">
                 <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" @click="addToCart">
@@ -50,57 +74,47 @@
         layout: 'products',
         data(){
             return{
-                data: null,
-                value: [],
+                cafe: {
+                    quantity: 150,
+                    price: 0.75
+                },
+                chocolate: {
+                    quantity: 32,
+                    price:5.05
+                },
+                chantilly:{
+                    quantity: 25,
+                    price:2.50
+                },
+                acucar: {
+                    quantity: 1,
+                    price: 0.02
+                },
                 newValue: null
             }
         },
-        async fetch(){
-
-            try {
-                const data = await this.$axios.$get(`product/get/${this.$route.params.id}`);
-                this.data = data.product;
-
-                for (let index = 0; index < this.data.opitions.length; index++) {
-                    this.value[index] = parseInt(this.data.opitions[index][4]); 
-                }
-            } catch (error) {
-                
-            }
-        },
-
-        fetchOnServer: false,
-
         methods:{
             back(){
                 this.$router.back()
             },
-            setInitialValues(index, value){
-                this.value[index] = parseInt(value);
-            },
             setValue(){
-                this.newValue = 0;
-                for (let index = 0; index < this.data.opitions.length; index++) {
-                    this.newValue += (this.value[index] * this.data.opitions[index][2]); 
-                    
-                }
                 
-                console.log(this.newValue);
+            },
+            setCafe(quantity, price){
+                this.cafe.quantity = quantity
+                this.cafe.price = price   
+            },
+            setAcucar(quantity, price){
+                this.acucar.quantity = quantity
+                this.acucar.price = price   
             },
             addToCart(){
-                var value;
-
-                if (this.newValue) {
-                    value = this.newValue;
-                }else{
-                    value = this.data.basePrice;
-                }
                 
 
                 const payload ={
-                    data: this.data,
-                    opitions: this.value,
-                    finalValue: value
+                    data: null,
+                    opitions: null,
+                    finalValue: null
                 }
                 this.$store.dispatch('cart/addProduct', payload);
             }

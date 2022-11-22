@@ -21,7 +21,17 @@
                     <van-button round color="#c7b199" size="normal" type="primary">G</van-button>
                 </div>
                 <div class="ingredients_form">
-                    <div v-for="(item, index) in data.opitions" class="ingredients_form_item">
+                    <div class="ingredients_form_item">
+                        <p>Café</p>
+                        <p class="unit_Measurement">{{value[index]}}<span>{{item[3]}}</span></p>
+                        <van-slider @change="setValue()" v-model="value[index]" :step="parseInt(item[5])" />
+                    </div>
+                    <div class="ingredients_form_item">
+                        <p>{{item[1]}}</p>
+                        <p class="unit_Measurement">{{value[index]}}<span>{{item[3]}}</span></p>
+                        <van-slider @change="setValue()" v-model="value[index]" :step="parseInt(item[5])" />
+                    </div>
+                    <div class="ingredients_form_item">
                         <p>{{item[1]}}</p>
                         <p class="unit_Measurement">{{value[index]}}<span>{{item[3]}}</span></p>
                         <van-slider @change="setValue()" v-model="value[index]" :step="parseInt(item[5])" />
