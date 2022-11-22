@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <h1>Carrinho</h1>
-        <div class="list" v-if="cart">
-            <Itemcart v-for="(item, index) in cart" :key="index" :data="item"/>
+        <div class="list" v-if="cart" style="padding-bottom:130px">
+            <Itemcart style="margin-bottom:20px;" v-for="(item, index) in cart" :key="index" :data="item"/>
         </div>
         <div class="footerBar">
             <div class="price">
