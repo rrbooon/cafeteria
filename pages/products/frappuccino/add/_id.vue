@@ -57,8 +57,7 @@
         <div class="footerBar">
             <div class="price">
                 <h5>Price</h5>
-                <p v-if="newValue" translate="no"><span translate="no">R$</span> {{'10'.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
-                <p v-else translate="no"><span translate="no">R$</span> {{'10'.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
+                <p translate="no"><span translate="no">R$</span> {{newValue.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
             </div>
             <div class="btn_add">
                 <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" @click="addToCart">
@@ -80,17 +79,17 @@
                 },
                 chocolate: {
                     quantity: 32,
-                    price:5.05
+                    price: 0.0505
                 },
                 chantilly:{
                     quantity: 25,
-                    price:2.50
+                    price: 0.025
                 },
                 acucar: {
                     quantity: 1,
                     price: 0.02
                 },
-                newValue: null
+                newValue: 3
             }
         },
         methods:{
@@ -98,15 +97,22 @@
                 this.$router.back()
             },
             setValue(){
-                
+                const cafePrice = this.cafe.price
+                const chocolatePrice = (this.chocolate.quantity * this.chocolate.price)
+                const chantillyPrice = (this.chantilly.quantity * this.chantilly.price)
+                const acucarPrice = this.acucar.price
+
+                this.newValue = cafePrice + chocolatePrice + chantillyPrice + acucarPrice
             },
             setCafe(quantity, price){
                 this.cafe.quantity = quantity
                 this.cafe.price = price   
+                this.setValue()
             },
             setAcucar(quantity, price){
                 this.acucar.quantity = quantity
                 this.acucar.price = price   
+                this.setValue()
             },
             addToCart(){
                 
