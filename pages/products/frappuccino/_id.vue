@@ -38,7 +38,7 @@
                 <p><span>R$</span> 3,00</p>
             </div>
             <div class="btn_add">
-                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" :to="`/products/add/${data._id}`">
+                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" :to="`/products/frappuccino/add/${data._id}`">
                     Add Product
                 </van-button>
             </div>
