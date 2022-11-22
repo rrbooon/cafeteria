@@ -41,7 +41,7 @@ export default {
   },
   beforeCreate(){
     this.$store.dispatch('products/getProducts');
-    this.$store.dispatch('routes/setActivePage', 2)
+    this.$store.dispatch('routes/setActivePage', 1)
   }, 
 }
 </script>
