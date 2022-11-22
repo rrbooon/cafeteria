@@ -1,6 +1,7 @@
 <template>
   <div class="container hover"
     :style="{'background-image': 'linear-gradient('+gradientAngle+','+color1+','+color2+')'}"
+    v-if="visible"
   >
     <div class="image">
         <img :src="`https://backendcafeteriaca.herokuapp.com/images/${imagePath}`" alt="">
@@ -19,7 +20,22 @@
 </template>
 <script>
 export default {
-    
+    data(){
+        return{
+            visible: true
+        }
+    },
+    watch:{
+        search(newValue, oldValue){
+            const filter = newValue.toUpperCase()
+            const txtValue = this.title;
+            if (txtValue.toUpperCase().includes(filter)) {
+                this.visible = true
+            } else {
+                this.visible = false
+            }
+        }
+    },
     props:{
         id: String,
         item: String,
@@ -27,7 +43,8 @@ export default {
         title: String,
         subtitle: String,
         price: Number,
-        
+        search: String,
+
         color1: String,
         color2: String,
         gradientAngle: String
