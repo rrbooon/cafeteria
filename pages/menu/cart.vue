@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <h1>Carrinho</h1>
+        <van-field v-model="nome" label="Nome"  placeholder="digite seu nome"/>
         <div class="list" v-if="cart" style="padding-bottom:130px">
             <Itemcart style="margin-bottom:20px;" v-for="(item, index) in cart" :key="index" :data="item"/>
         </div>
@@ -8,13 +9,15 @@
             <div class="price">
                 <h5>Price</h5>
                 <p v-if="finalValue" translate="no">
-                    <span translate="no">R$ </span>{{finalValue.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
+                    <span translate="no">R$ </span>{{finalValue.toLocaleString('pt-br', {minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                    })}}</p>
                 <p v-else translate="no">
                     <span translate="no">R$</span>
                     0,00</p>
             </div>
             <div class="btn_add">
-                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)">
+                <van-button @click="comprar()" color="linear-gradient(225deg, #c7b199, #c7b199)">
                     Close Order
                 </van-button>
             </div>
@@ -25,6 +28,8 @@
 <script>
 import { mapState } from 'vuex'
 import Itemcart from '../../components/cart/Itemcart.vue'
+import { collection, addDoc } from "firebase/firestore"; 
+import db from '../../config/firebase'
 
 export default {
   components: {
@@ -39,11 +44,32 @@ export default {
   methods:{
     deleteItem(id){
       this.$store.dispatch('cart/removeProduct', id);
+    },
+    async comprar(){
+
+        if (this.nome && Object.keys(this.cart).length > 0) {
+            const data = {
+                nome: this.nome,
+                payload: this.cart,
+                date: new Date()
+            }
+            const docRef = await addDoc(collection(db, "pedidos"), data);
+            console.log("Document written with ID: ", docRef.id);
+            this.$store.dispatch('cart/removeAllProduct', null);
+        }else{
+            alert('Digite um nome para retirar o pedido.')
+        }
+        
     }
   },
   beforeCreate(){
     this.$store.dispatch('routes/setActivePage', 5)
   }, 
+  data(){
+    return{
+        nome: ''
+    }
+  }
 }
 </script>
 <style scoped>

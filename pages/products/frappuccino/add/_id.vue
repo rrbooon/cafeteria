@@ -34,7 +34,7 @@
                     <div class="ingredients_form_item">
                         <p>Chocolate</p>
                         <p class="unit_Measurement">{{chocolate.quantity}}<span>g</span></p>
-                        <van-slider @change="setValue(); unsetSize();" v-model="chocolate.quantity" :min="0" :max="90"/>
+                        <van-slider @change="setValue(); unsetSize();" v-model="chocolate.quantity" :min="0" :step="2" :max="90"/>
                     </div>
                     <div class="ingredients_form_item">
                         <p>Chantilly</p>
@@ -57,7 +57,10 @@
         <div class="footerBar">
             <div class="price">
                 <h5>Price</h5>
-                <p translate="no"><span translate="no">R$</span> {{newValue.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
+                <p translate="no"><span translate="no">R$</span> {{newValue.toLocaleString('pt-br', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                })}}</p>
             </div>
             <div class="btn_add">
                 <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" @click="addToCart()">
@@ -325,7 +328,7 @@
                         acucar: {
                             name: 'Açúcar',
                             quantity:this.acucar.quantity,
-                            unity: ''                            
+                            unity: 'clh'                            
                         },
                     },
                     finalValue: this.newValue
@@ -481,6 +484,7 @@
         left: 21px;
         backdrop-filter: blur( 7px );
         color: black;
+        z-index: 10000;
     }
 
     .unit_Measurement{

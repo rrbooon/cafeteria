@@ -9,6 +9,11 @@ export default {
     DELETE_PRODUCT(state, payload){
         state.finalValue -= state.cart[payload].finalValue;
         delete state.cart[payload];
+    },
+
+    DELETE_ALL_PRODUCT(state, payload){
+        state.cart = {}
+        state.finalValue = 0
     }
     
 }

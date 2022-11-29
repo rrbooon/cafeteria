@@ -1,59 +1,190 @@
 <template>
-    <div class="container_index">
-        <div class="image_background">
-            <img src="/img/cafe.jpg" alt="">
+  <div class="container container_home">
+    <header>
+        <div class="header">
+            <h1>Bem-vindo.</h1>
+            <img src="/img/icons/java.png" style="max-height:60px" alt="">
         </div>
-        <div class="title">
-            <h1>Hello!</h1>
+        <div class="header coffee-shop-name">
+            <h1>Inoffe Café</h1>
         </div>
-        <LoggedOutCardEntrie />
-    </div>
+        <div class="header coffee-shop-name">
+            <img src="/logo.png" alt="" id="logo">
+        </div>
+    </header>
+    <main>
+        <div class="offers">
+            <CoffeeShopMenu v-if="foods" :to="'foods'" :title="'Promoções'" :color1="'#c7b199'" :color2="'#c7b199'" :gradientAngle="'225deg'" :content="foods"/>
+        </div>
+    </main>
+  </div>
 </template>
+
 <script>
-import LoggedOutCardEntrie from '../components/Card/LoggedOutCardEntrie.vue'
-export default {
-    layout: 'LoggedOut',
-    components:{
-        LoggedOutCardEntrie
-    }
+import CoffeeShopMenu from '../components/Menu/CoffeeShopMenu.vue'
+import { mapState } from 'vuex'
+
+const cardapio = {
+        "foods": [
+            {
+                "title": "Hamburguer1",
+                "subtitle": "Pão com carne 1",
+                "price": "30,00",
+                "imagePath":"/img/hamburguer.jpg"
+            },
+            {
+                "title": "Pão na chapa",
+                "subtitle": "with manteiga",
+                "price": "8,00",
+                "imagePath":"/img/hamburguer.jpg"
+            },
+            {
+                "title": "Donuts",
+                "subtitle": "with cream",
+                "price": "10,00",
+                "imagePath":"/img/hamburguer.jpg"
+            },
+            
+            {
+                "title": "Pão na chapa",
+                "subtitle": "with creamchesee",
+                "price": "5,00",
+                "imagePath":"/img/hamburguer.jpg"
+            },
+            {
+                "title": "Donuts",
+                "subtitle": "with chocolate",
+                "price": "15,00",
+                "imagePath":"/img/hamburguer.jpg"
+            },
+            {
+                "title": "Hamburguer2",
+                "subtitle": "Pão com carne 2",
+                "price": "60,00",
+                "imagePath":"/img/hamburguer.jpg"
+            }
+        
+        ],
+        "drinks": [
+            {
+                "title": "Café",
+                "subtitle": "brazilian coffee",
+                "price": "10,00",
+                "imagePath":"/img/hamburguer.jpg"
+            },
+            {
+                "title": "Espresso",
+                "subtitle": "machine coffee",
+                "price": "2,00",
+                "imagePath":"/img/hamburguer.jpg"
+            },
+            {
+                "title": "Orange juice",
+                "subtitle": "Organic orange",
+                "price": "15,00",
+                "imagePath":"/img/hamburguer.jpg"
+            },
+            {
+                "title": "Espresso",
+                "subtitle": "machine coffee",
+                "price": "2,00",
+                "imagePath":"/img/hamburguer.jpg"
+            },
+            {
+                "title": "Café",
+                "subtitle": "brazilian coffee",
+                "price": "10,00",
+                "imagePath":"/img/hamburguer.jpg"
+            },
+            {
+                "title": "Orange juice",
+                "subtitle": "Organic orange",
+                "price": "15,00",
+                "imagePath":"/img/hamburguer.jpg"
+            }
+        ],
+        "offers": [
+            {
+                "title": "Hamburguer2",
+                "subtitle": "Pão com carne 2",
+                "price": "10,00",
+                "imagePath":"/img/hamburguer.jpg"
+            },
+            {
+                "title": "Orange juice",
+                "subtitle": "Organic orange",
+                "price": "5,00",
+                "imagePath":"/img/hamburguer.jpg"
+            },
+            {
+                "title": "Donuts",
+                "subtitle": "with chocolate",
+                "price": "8,00",
+                "imagePath":"/img/hamburguer.jpg"
+            },
+            {
+                "title": "Espresso",
+                "subtitle": "machine coffee",
+                "price": "1,00",
+                "imagePath":"/img/hamburguer.jpg"
+            }
+        ]
 }
+
+export default {
+  name: 'IndexPage',
+  components: { 
+    CoffeeShopMenu
+  },
+  data(){
+    return{
+        teste:{},
+        cardapio
+    }
+  },
+  computed:{
+    ...mapState({
+        foods: state => state.products.foods,
+        drinks: state => state.products.drinks,
+        offers: state => state.products.offers,
+    })
+  },
+  beforeCreate(){
+    this.$store.dispatch('products/getProducts');
+    this.$store.dispatch('routes/setActivePage', 0);
+  },
+  methods:{
+    
+  }
+}
+  
+
 </script>
 <style scoped>
-    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap');
-
-    .container_index{
+    #logo{
         width: 100%;
-        height: 100%;
+        margin: auto;
+    }
+
+    .container_home{
+        padding-bottom: 80px;
+    }
+
+    .header{
+        width: 100%;
         display: flex;
-        align-items: center;
         justify-content: center;
-        flex-direction: column;
-        padding-top: 60%;
+        padding-top: 5rem;
     }
 
-    .image_background{
-        width: 100%;
+    .coffee-shop-name{
+        padding-top: 1rem;
     }
 
-    .image_background img{
-        max-width: 100%;
-        position: absolute;
-        top: 0;
-        z-index: -2;
-        filter: blur(0.5px) brightness(0.75);
-        -webkit-filter: blur(0.5px) brightness(0.75);
+    .offers{
+        padding-top: 1rem;
     }
-
-    .title{
-        width: 90%;
-        display: flex;
-        justify-content: flex-start;
-    }
-
-    .title h1{
-        font-family: 'Oswald', sans-serif;
-        font-weight: 700;
-        color: white;
-    }
-    
 </style>
+
+
+
