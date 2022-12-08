@@ -4,18 +4,18 @@
             <van-icon name="arrow-left" />
         </div>
         <div class="image">
-            <img :src="`https://backendcafeteriaca.herokuapp.com/images/${data.imagePath}`" alt="">
+            <img :src="`/img/torta/foto.jpeg`" alt="">
         </div>
         <div class="content">
             <div class="title">
-                <h1>{{data.name}}</h1>
+                <h1>Torta de creme de pistache</h1>
             </div>
             <div class="description">
                 <div class="descriptionSubtitle">
                     <h5>Description</h5>
                 </div>
                 <div class="descriptionContent">
-                    <p>{{data.description}}</p>
+                    <p>Torta de creme de pistache</p>
                 </div>
             </div>
             <div class="ingredients">
@@ -24,7 +24,9 @@
                 </div>
                 <div class="ingredientsContent">
                     <ul>
-                        <li v-for="(item, index) in data.opitions" :key="index">{{item[1]}}</li>
+                        <li>Massa</li>
+                        <li>Recheio</li>
+                        <li>Nozes</li>
                     </ul>
                 </div>
             </div>
@@ -32,10 +34,10 @@
         <div class="footerBar">
             <div class="price">
                 <h5>Price</h5>
-                <p><span>R$</span> {{data.basePrice.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
+                <p><span>R$</span> {{data.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
             </div>
             <div class="btn_add">
-                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" :to="`/products/add/${data._id}`">
+                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" :to="`/products/croissant/add/${data._id}`">
                     Add Product
                 </van-button>
             </div>
@@ -48,16 +50,7 @@
         layout: 'products',
         data(){
             return{
-                data: null
-            }
-        },
-        async fetch(){
-
-            try {
-                const data = await this.$axios.$get(`product/get/${this.$route.params.id}`);
-                this.data = data.product;
-            } catch (error) {
-                
+                data: 7.10
             }
         },
 

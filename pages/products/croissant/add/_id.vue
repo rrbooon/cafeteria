@@ -1,30 +1,40 @@
 <template>
-    <div v-if="data" class="container">
+    <div class="container">
         <div class="back_button" @click="back">
             <van-icon name="arrow-left" />
         </div>
         <div class="image">
-            <img src="/img/massa.jpeg" class="massa" alt="">
-            <img src="/img/recheio.png"  class="recheio" alt="">
+            <img style="" src="/img/torta/creme.svg"  class="massa" alt="">
+            <img  src="/img/torta/massa.svg" class="recheio" alt="">
         </div>
         <div class="content">
             <div class="title">
-                <h1>{{data.name}}</h1>
+                <h1>Torta de creme de pistache</h1>
             </div>
             <div class="ingredients">
                 <div class="ingredientsSubtitle">
                     <h5>Ingredients</h5>
                 </div>
                 <div class="default_options">
-                    <van-button round color="#c7b199" size="normal" type="primary">P</van-button>
-                    <van-button round color="#c7b199" size="normal" type="primary">M</van-button>
-                    <van-button round color="#c7b199" size="normal" type="primary">G</van-button>
+                    <van-button round :color="size[1]" size="normal" @click="setSize(p, 1)" type="primary">P</van-button>
+                    <van-button round :color="size[2]" size="normal" @click="setSize(m, 2)" type="primary">M</van-button>
+                    <van-button round :color="size[3]" size="normal" @click="setSize(g, 3)" type="primary">G</van-button>
                 </div>
                 <div class="ingredients_form">
-                    <div v-for="(item, index) in data.opitions" class="ingredients_form_item">
-                        <p>{{item[1]}}</p>
-                        <p class="unit_Measurement">{{value[index]}}<span>{{item[3]}}</span></p>
-                        <van-slider @change="setValue()" v-model="value[index]" :step="parseInt(item[5])" />
+                    <div class="ingredients_form_item">
+                        <p>Massa</p>
+                        <p class="unit_Measurement">{{massa.quantity}}<span>g</span></p>
+                        <van-slider @change="setValue();" v-model="massa.quantity" :min="massa.min" :step="massa.step" :max="massa.max"/>
+                    </div>
+                    <div class="ingredients_form_item">
+                        <p>Recheio</p>
+                        <p class="unit_Measurement">{{recheio.quantity}}<span>g</span></p>
+                        <van-slider @change="setValue(); " v-model="recheio.quantity" :min="recheio.min" :step="recheio.step" :max="recheio.max"/>
+                    </div>
+                    <div class="ingredients_form_item">
+                        <p>Nozes</p>
+                        <p class="unit_Measurement">{{nozes.quantity}}<span>g</span></p>
+                        <van-slider @change="setValue(); " v-model="nozes.quantity" :min="nozes.min" :step="nozes.step" :max="nozes.max"/>
                     </div>
                 </div>
             </div>
@@ -32,11 +42,13 @@
         <div class="footerBar">
             <div class="price">
                 <h5>Price</h5>
-                <p v-if="newValue" translate="no"><span translate="no">R$</span> {{newValue.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
-                <p v-else translate="no"><span translate="no">R$</span> {{data.basePrice.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
+                <p translate="no"><span translate="no">R$</span> {{newValue.toLocaleString('pt-br', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                })}}</p>
             </div>
             <div class="btn_add">
-                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" @click="addToCart">
+                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" @click="addToCart()">
                     Add to cart
                 </van-button>
             </div>
@@ -49,57 +61,176 @@
         layout: 'products',
         data(){
             return{
-                data: null,
-                value: [],
-                newValue: null
+                massa: {
+                    quantity: 45,
+                    price: 0.011,
+                    min: 38,
+                    max: 52,
+                    step: 7
+                },
+                recheio:{
+                    quantity: 60,
+                    price: 0.055,
+                    min: 50,
+                    max: 70,
+                    step: 10
+                },
+                nozes:{
+                    quantity: 60,
+                    price: 0.081,
+                    min: 50,
+                    max: 70,
+                    step: 10
+                },
+                p:{
+                    massa: {
+                        quantity: 45,
+                        price: 0.011,
+                        min: 38,
+                        max: 52,
+                        step: 7
+                    },
+                    recheio:{
+                        quantity: 60,
+                        price: 0.055,
+                        min: 50,
+                        max: 70,
+                        step: 10
+                    },
+                    nozes:{
+                        quantity: 60,
+                        price: 0.055,
+                        min: 50,
+                        max: 70,
+                        step: 10
+                    },
+                },
+                m:{
+                    massa: {
+                        quantity: 55,
+                        price: 0.011,
+                        min: 45,
+                        max: 65,
+                        step: 10
+                    },
+                    recheio:{
+                        quantity: 72,
+                        price: 0.055,
+                        min: 60,
+                        max: 84,
+                        step: 12
+                    },
+                    nozes:{
+                        quantity: 72,
+                        price: 0.055,
+                        min: 60,
+                        max: 84,
+                        step: 12
+                    },
+                },
+                g:{
+                    massa: {
+                        quantity: 65,
+                        price: 0.011,
+                        min: 55,
+                        max: 75,
+                        step: 10 
+                    },
+                    recheio:{
+                        quantity: 84,
+                        price: 0.055,
+                        min: 70,
+                        max: 98,
+                        step: 14
+                    },
+                    nozes:{
+                        quantity: 84,
+                        price: 0.055,
+                        min: 70,
+                        max: 98,
+                        step: 14
+                    },
+                },
+                size:{
+                    1: '#8e7e6d',
+                    2: '#c7b199',
+                    3: '#c7b199'
+                },
+                newValue: 7.10
             }
         },
-        async fetch(){
-
-            try {
-                const data = await this.$axios.$get(`product/get/${this.$route.params.id}`);
-                this.data = data.product;
-
-                for (let index = 0; index < this.data.opitions.length; index++) {
-                    this.value[index] = parseInt(this.data.opitions[index][4]); 
-                }
-            } catch (error) {
-                
-            }
-        },
-
-        fetchOnServer: false,
-
         methods:{
             back(){
                 this.$router.back()
             },
-            setInitialValues(index, value){
-                this.value[index] = parseInt(value);
-            },
-            setValue(){
-                this.newValue = 0;
-                for (let index = 0; index < this.data.opitions.length; index++) {
-                    this.newValue += (this.value[index] * this.data.opitions[index][2]); 
-                    
+            setSize(data, selected){
+
+                this.massa = data.massa
+
+                this.recheio = data.recheio
+
+                this.nozes = data.nozes
+
+
+                switch (selected) {
+                    case 1:
+                        this.size[1] = '#8e7e6d'
+                        this.size[2] = '#c7b199'
+                        this.size[3] = '#c7b199'
+                        
+                        break;
+                    case 2:
+                        this.size[1] = '#c7b199'
+                        this.size[2] = '#8e7e6d'
+                        this.size[3] = '#c7b199'
+                        break;
+                    case 3:
+                        this.size[1] = '#c7b199'
+                        this.size[2] = '#c7b199'
+                        this.size[3] = '#8e7e6d'
+                        break;
                 }
                 
-                console.log(this.newValue);
+
+                this.setValue()
+            },
+            unsetSize(){
+                this.size[1] = '#c7b199'
+                this.size[2] = '#c7b199'
+                this.size[3] = '#c7b199'
+            },
+            setValue(){
+                
+                const chocolatePrice = (this.massa.quantity * this.massa.price)
+                const chantillyPrice = (this.recheio.quantity * this.recheio.price)
+                const chantillyPrice2 = (this.nozes.quantity * this.nozes.price)
+                
+
+                this.newValue = chocolatePrice + chantillyPrice + chantillyPrice2
             },
             addToCart(){
-                var value;
-
-                if (this.newValue) {
-                    value = this.newValue;
-                }else{
-                    value = this.data.basePrice;
-                }
                 
 
                 const payload ={
-                    data: this.data,
-                    opitions: this.value,
-                    finalValue: value
+                    name: 'Torta',
+                    opitions: {
+                        massa: {
+                            name: 'Massa',
+                            quantity:this.massa.quantity,
+                            unity: 'g'                            
+                        },
+                        recheio: {
+                            name: 'Recheio',
+                            quantity:this.recheio.quantity,
+                            unity: 'g'                            
+                        },
+                        nozes: {
+                            name: 'Nozes',
+                            quantity:this.recheio.quantity,
+                            unity: 'ml'                            
+                        },
+                    },
+                    finalValue: this.newValue
                 }
                 this.$store.dispatch('cart/addProduct', payload);
             }
@@ -121,18 +252,25 @@
     }
 
     .massa{
-        width: 100%;
+        width: 80%;
         /* position: absolute; */
         position: absolute;
         top: 97px;
     }
 
     .recheio{
-        width: 85%;
+        /* height: 75%; */
+        z-index: -10;
+        position: absolute;
+        top: 97px;
+    }
+
+    .recheio2{
+        width: 80%;
         /* height: 75%; */
         z-index: 10;
         position: absolute;
-        top: 110px;
+        top: 97px;
     }
 
     .image{
@@ -145,7 +283,7 @@
     }
 
     .image img{
-        max-height: 100%;
+        height: 300px;
         border-radius: 10px;
     }
     .content{
@@ -243,6 +381,7 @@
         left: 21px;
         backdrop-filter: blur( 7px );
         color: black;
+        z-index: 10000;
     }
 
     .unit_Measurement{

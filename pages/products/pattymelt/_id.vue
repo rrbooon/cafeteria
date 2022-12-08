@@ -4,7 +4,7 @@
             <van-icon name="arrow-left" />
         </div>
         <div class="image">
-            <img :src="`https://backendcafeteriaca.herokuapp.com/images/${data.imagePath}`" alt="">
+            <img :src="`http://localhost:1337/images/${data.imagePath}`" alt="">
         </div>
         <div class="content">
             <div class="title">
@@ -35,7 +35,7 @@
                 <p><span>R$</span> {{data.basePrice.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
             </div>
             <div class="btn_add">
-                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" :to="`/products/add/${data._id}`">
+                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" :to="`/products/pattymelt/add/${data._id}`">
                     Add Product
                 </van-button>
             </div>

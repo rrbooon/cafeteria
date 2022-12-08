@@ -1,40 +1,59 @@
 <template>
-    <div v-if="data" class="container">
+    <div class="container">
         <div class="back_button" @click="back">
             <van-icon name="arrow-left" />
         </div>
         <div class="image">
-            <img src="/img/massa.jpeg" class="massa" alt="">
-            <img src="/img/recheio.png"  class="recheio" alt="">
+            <img style="" src="/img/lanche/ps.svg"  class="massa" alt="">
+            <img :style="`z-index:120;`" src="/img/lanche/cs.svg"  class="recheio2" alt="">
+            <img style="" src="/img/lanche/b.svg"  class="recheio2" alt="">
+            <img style="" src="/img/lanche/ca.svg"  class="recheio2" alt="">
+            <img style="" src="/img/lanche/ci.svg"  class="recheio2" alt="">
+            <img style="" src="/img/lanche/pi.svg"  class="recheio2" alt="">
+            
         </div>
         <div class="content">
             <div class="title">
-                <h1>{{data.name}}</h1>
+                <h1>Patty melt</h1>
             </div>
             <div class="ingredients">
                 <div class="ingredientsSubtitle">
                     <h5>Ingredients</h5>
                 </div>
                 <div class="default_options">
-                    <van-button round color="#c7b199" size="normal" type="primary">P</van-button>
-                    <van-button round color="#c7b199" size="normal" type="primary">M</van-button>
-                    <van-button round color="#c7b199" size="normal" type="primary">G</van-button>
+                    <van-button round :color="size[1]" size="normal" @click="setSize(p, 1)" type="primary">P</van-button>
+                    <van-button round :color="size[2]" size="normal" @click="setSize(m, 2)" type="primary">M</van-button>
+                    <van-button round :color="size[3]" size="normal" @click="setSize(g, 3)" type="primary">G</van-button>
                 </div>
                 <div class="ingredients_form">
                     <div class="ingredients_form_item">
-                        <p>Café</p>
-                        <p class="unit_Measurement">{{value[index]}}<span>{{item[3]}}</span></p>
-                        <van-slider @change="setValue()" v-model="value[index]" :step="parseInt(item[5])" />
+                        <p>Pão</p>
+                        <p class="unit_Measurement">{{pao.quantity}}<span>ml</span></p>
+                        <div class="default_options">
+                            <van-button round :color="pao.selected[1]" size="normal" @click="setCafe('p', 0.30, 1)" type="primary">P</van-button>
+                            <van-button round :color="pao.selected[2]" size="normal" @click="setCafe('m', 0.50, 2)" type="primary">M</van-button>
+                            <van-button round :color="pao.selected[3]" size="normal" @click="setCafe('g', 1.20, 3)" type="primary">G</van-button>
+                        </div>
                     </div>
                     <div class="ingredients_form_item">
-                        <p>{{item[1]}}</p>
-                        <p class="unit_Measurement">{{value[index]}}<span>{{item[3]}}</span></p>
-                        <van-slider @change="setValue()" v-model="value[index]" :step="parseInt(item[5])" />
+                        <p>Recheio</p>
+                        <p class="unit_Measurement">{{recheio.quantity}}<span>g</span></p>
+                        <van-slider @change="setValue(); unsetSize();" v-model="recheio.quantity" :min="0" :step="2" :max="90"/>
                     </div>
                     <div class="ingredients_form_item">
-                        <p>{{item[1]}}</p>
-                        <p class="unit_Measurement">{{value[index]}}<span>{{item[3]}}</span></p>
-                        <van-slider @change="setValue()" v-model="value[index]" :step="parseInt(item[5])" />
+                        <p>Bacon</p>
+                        <p class="unit_Measurement">{{bacon.quantity}}<span>g</span></p>
+                        <van-slider @change="setValue(); unsetSize();" v-model="bacon.quantity" :min="0" :step="2" :max="90"/>
+                    </div>
+                    <div class="ingredients_form_item">
+                        <p>Cheddar</p>
+                        <p class="unit_Measurement">{{cheddar.quantity}}<span>ml</span></p>
+                        <van-slider @change="setValue();  unsetSize();" v-model="cheddar.quantity" :min="0" :max="82"/>
+                    </div>
+                    <div class="ingredients_form_item">
+                        <p>Cebola</p>
+                        <p class="unit_Measurement">{{cebola.quantity}}<span>ml</span></p>
+                        <van-slider @change="setValue();  unsetSize();" v-model="cebola.quantity" :min="0" :max="82"/>
                     </div>
                 </div>
             </div>
@@ -42,11 +61,13 @@
         <div class="footerBar">
             <div class="price">
                 <h5>Price</h5>
-                <p v-if="newValue" translate="no"><span translate="no">R$</span> {{newValue.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
-                <p v-else translate="no"><span translate="no">R$</span> {{data.basePrice.toLocaleString('pt-br', {minimumFractionDigits: 2})}}</p>
+                <p translate="no"><span translate="no">R$</span> {{newValue.toLocaleString('pt-br', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                })}}</p>
             </div>
             <div class="btn_add">
-                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" @click="addToCart">
+                <van-button color="linear-gradient(225deg, #c7b199, #c7b199)" @click="addToCart()">
                     Add to cart
                 </van-button>
             </div>
@@ -59,57 +80,270 @@
         layout: 'products',
         data(){
             return{
-                data: null,
-                value: [],
-                newValue: null
+                pao: {
+                    quantity: 'p',
+                    price: 0.30,
+                    selected:{
+                        1: '#8e7e6d',
+                        2: '#c7b199',
+                        3: '#c7b199'
+                    }
+                },
+                recheio: {
+                    quantity: 14,
+                    price: 0.0505,
+                    max: 20
+                },
+                bacon: {
+                    quantity: 14,
+                    price: 0.03,
+                    max: 20
+                },
+                cheddar:{
+                    quantity: 14,
+                    price: 0.018,
+                    max: 20
+                },
+                cebola: {
+                    quantity: 14,
+                    price: 0.005,
+                    max: 20
+                },
+                p:{
+                    cafe: {
+                        quantity: 'p',
+                        price: 0.30,
+                        selected:{
+                            1: '#8e7e6d',
+                            2: '#c7b199',
+                            3: '#c7b199'
+                        }
+                    },
+                    recheio: {
+                        quantity: 14,
+                        price: 0.0505,
+                        max: 20
+                    },
+                    bacon: {
+                        quantity: 14,
+                        price: 0.03,
+                        max: 20
+                    },
+                    cheddar:{
+                        quantity: 14,
+                        price: 0.018,
+                        max: 20
+                    },
+                    cebola: {
+                        quantity: 14,
+                        price: 0.005,
+                        max: 20
+                    },
+                },
+                m:{
+                    cafe: {
+                        quantity: 'p',
+                        price: 0.30,
+                        selected:{
+                            1: '#8e7e6d',
+                            2: '#c7b199',
+                            3: '#c7b199'
+                        }
+                    },
+                    recheio: {
+                        quantity: 14,
+                        price: 0.0505,
+                        max: 20
+                    },
+                    bacon: {
+                        quantity: 14,
+                        price: 0.03,
+                        max: 20
+                    },
+                    cheddar:{
+                        quantity: 14,
+                        price: 0.018,
+                        max: 20
+                    },
+                    cebola: {
+                        quantity: 14,
+                        price: 0.005,
+                        max: 20
+                    },
+                },
+                g:{
+                    cafe: {
+                        quantity: 'p',
+                        price: 0.30,
+                        selected:{
+                            1: '#8e7e6d',
+                            2: '#c7b199',
+                            3: '#c7b199'
+                        }
+                    },
+                    recheio: {
+                        quantity: 14,
+                        price: 0.0505,
+                        max: 20
+                    },
+                    bacon: {
+                        quantity: 14,
+                        price: 0.03,
+                        max: 20
+                    },
+                    cheddar:{
+                        quantity: 14,
+                        price: 0.018,
+                        max: 20
+                    },
+                    cebola: {
+                        quantity: 14,
+                        price: 0.005,
+                        max: 20
+                    },
+                },
+                size:{
+                    1: '#8e7e6d',
+                    2: '#c7b199',
+                    3: '#c7b199'
+                },
+                newValue: 3
             }
         },
-        async fetch(){
-
-            try {
-                const data = await this.$axios.$get(`product/get/${this.$route.params.id}`);
-                this.data = data.product;
-
-                for (let index = 0; index < this.data.opitions.length; index++) {
-                    this.value[index] = parseInt(this.data.opitions[index][4]); 
-                }
-            } catch (error) {
-                
-            }
-        },
-
-        fetchOnServer: false,
-
         methods:{
             back(){
                 this.$router.back()
             },
-            setInitialValues(index, value){
-                this.value[index] = parseInt(value);
-            },
-            setValue(){
-                this.newValue = 0;
-                for (let index = 0; index < this.data.opitions.length; index++) {
-                    this.newValue += (this.value[index] * this.data.opitions[index][2]); 
-                    
+            setSize(data, selected){
+                this.cafe = data.cafe
+
+                this.chocolate.quantity = data.chocolate.quantity
+
+                this.chantilly.quantity = data.chantilly.quantity
+
+
+                this.acucar = data.acucar
+
+                switch (selected) {
+                    case 1:
+                        this.size[1] = '#8e7e6d'
+                        this.size[2] = '#c7b199'
+                        this.size[3] = '#c7b199'
+                        
+                        break;
+                    case 2:
+                        this.size[1] = '#c7b199'
+                        this.size[2] = '#8e7e6d'
+                        this.size[3] = '#c7b199'
+                        break;
+                    case 3:
+                        this.size[1] = '#c7b199'
+                        this.size[2] = '#c7b199'
+                        this.size[3] = '#8e7e6d'
+                        break;
                 }
                 
-                console.log(this.newValue);
+
+                this.setValue()
+            },
+            unsetSize(){
+                this.size[1] = '#c7b199'
+                this.size[2] = '#c7b199'
+                this.size[3] = '#c7b199'
+            },
+            setValue(){
+                const cafePrice = this.cafe.price
+                const chocolatePrice = (this.chocolate.quantity * this.chocolate.price)
+                const chantillyPrice = (this.chantilly.quantity * this.chantilly.price)
+                const acucarPrice = this.acucar.price
+
+                this.newValue = cafePrice + chocolatePrice + chantillyPrice + acucarPrice
+            },
+            setCafe(quantity, price, selected){
+                this.cafe.quantity = quantity
+                this.cafe.price = price   
+                this.setValue()
+
+                switch (selected) {
+                    case 1:
+                        this.cafe.selected[1] = '#8e7e6d'
+                        this.cafe.selected[2] = '#c7b199'
+                        this.cafe.selected[3] = '#c7b199'
+                        
+                        break;
+                    case 2:
+                        this.cafe.selected[1] = '#c7b199'
+                        this.cafe.selected[2] = '#8e7e6d'
+                        this.cafe.selected[3] = '#c7b199'
+                        break;
+                    case 3:
+                        this.cafe.selected[1] = '#c7b199'
+                        this.cafe.selected[2] = '#c7b199'
+                        this.cafe.selected[3] = '#8e7e6d'
+                        break;
+                }
+            },
+            setAcucar(quantity, price, selected){
+                this.acucar.quantity = quantity
+                this.acucar.price = price   
+                this.setValue()
+
+                switch (selected) {
+                    case 1:
+                        this.acucar.selected[1] = '#8e7e6d'
+                        this.acucar.selected[2] = '#c7b199'
+                        this.acucar.selected[3] = '#c7b199'
+                        this.acucar.selected[4] = '#c7b199'
+                        
+                        break;
+                    case 2:
+                        this.acucar.selected[1] = '#c7b199'
+                        this.acucar.selected[2] = '#8e7e6d'
+                        this.acucar.selected[3] = '#c7b199'
+                        this.acucar.selected[4] = '#c7b199'
+                        break;
+                    case 3:
+                        this.acucar.selected[1] = '#c7b199'
+                        this.acucar.selected[2] = '#c7b199'
+                        this.acucar.selected[3] = '#8e7e6d'
+                        this.acucar.selected[4] = '#c7b199'
+                        break;
+                    case 4:
+                        this.acucar.selected[1] = '#c7b199'
+                        this.acucar.selected[2] = '#c7b199'
+                        this.acucar.selected[3] = '#c7b199'
+                        this.acucar.selected[4] = '#8e7e6d'
+                        break;
+                }
             },
             addToCart(){
-                var value;
-
-                if (this.newValue) {
-                    value = this.newValue;
-                }else{
-                    value = this.data.basePrice;
-                }
                 
 
                 const payload ={
-                    data: this.data,
-                    opitions: this.value,
-                    finalValue: value
+                    name: 'Frappuccino',
+                    opitions: {
+                        cafe: {
+                            name: 'Café',
+                            quantity:this.cafe.quantity,
+                            unity: 'ml'                            
+                        },
+                        chocolate: {
+                            name: 'Chocolate',
+                            quantity:this.chocolate.quantity,
+                            unity: 'g'                            
+                        },
+                        chantilly: {
+                            name: 'Chantilly',
+                            quantity:this.chantilly.quantity,
+                            unity: 'ml'                            
+                        },
+                        acucar: {
+                            name: 'Açúcar',
+                            quantity:this.acucar.quantity,
+                            unity: 'clh'                            
+                        },
+                    },
+                    finalValue: this.newValue
                 }
                 this.$store.dispatch('cart/addProduct', payload);
             }
@@ -131,18 +365,25 @@
     }
 
     .massa{
-        width: 100%;
+        width: 80%;
         /* position: absolute; */
         position: absolute;
         top: 97px;
     }
 
     .recheio{
-        width: 85%;
+        /* height: 75%; */
+        z-index: -10;
+        position: absolute;
+        top: 97px;
+    }
+
+    .recheio2{
+        width: 80%;
         /* height: 75%; */
         z-index: 10;
         position: absolute;
-        top: 110px;
+        top: 97px;
     }
 
     .image{
@@ -155,7 +396,7 @@
     }
 
     .image img{
-        max-height: 100%;
+        height: 300px;
         border-radius: 10px;
     }
     .content{
@@ -253,6 +494,7 @@
         left: 21px;
         backdrop-filter: blur( 7px );
         color: black;
+        z-index: 10000;
     }
 
     .unit_Measurement{

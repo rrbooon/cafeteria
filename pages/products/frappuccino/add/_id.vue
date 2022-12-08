@@ -4,9 +4,9 @@
             <van-icon name="arrow-left" />
         </div>
         <div class="image">
-            <img src="/img/frappuccino/frapuccino_copo.svg"  class="massa" alt="">
-            <img src="/img/frappuccino/frapuccino_ganache.svg"  class="recheio2" alt="">
-            <img src="/img/frappuccino/frapuccino_chantilly.svg" class="recheio" alt="">
+            <img style="" src="/img/frappuccino/copo1Artboard_1.svg"  class="massa" alt="">
+            <img style="" src="/img/frappuccino/ganache1Artboard_1.svg"  class="recheio2" alt="">
+            <img :style="`width:${((chantilly.quantity*72)/82)}%`" src="/img/frappuccino/chantilly1Artboard_1.png" class="recheio" alt="">
         </div>
         <div class="content">
             <div class="title">
@@ -353,27 +353,25 @@
     }
 
     .massa{
-        width: 100%;
+        width: 80%;
         /* position: absolute; */
         position: absolute;
         top: 97px;
     }
 
     .recheio{
-        width: 177px;
         /* height: 75%; */
-        z-index: 10;
+        z-index: -10;
         position: absolute;
-        top: -59px;
+        top: 97px;
     }
 
     .recheio2{
-        width: 244px;
+        width: 80%;
         /* height: 75%; */
         z-index: 10;
         position: absolute;
-        top: 65px;
-        left: 104px;
+        top: 97px;
     }
 
     .image{
