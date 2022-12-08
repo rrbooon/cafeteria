@@ -6,21 +6,13 @@
         <div class="image">
             <img style="" src="/img/frappuccino/copo1Artboard_1.svg"  class="massa" alt="">
             <img style="" src="/img/frappuccino/ganache1Artboard_1.svg"  class="recheio2" alt="">
-            <img :style="`width:${((chantilly.quantity*72)/82)}%`" src="/img/frappuccino/chantilly1Artboard_1.png" class="recheio" alt="">
+            <img :style="`width: 70%; top:${((chantilly.quantity/97)*82)}px`" src="/img/frappuccino/chantilly1Artboard_1.png" class="recheio" alt="">
         </div>
         <div class="content">
             <div class="title">
                 <h1>Frapuccino</h1>
             </div>
             <div class="ingredients">
-                <div class="ingredientsSubtitle">
-                    <h5>Ingredients</h5>
-                </div>
-                <div class="default_options">
-                    <van-button round :color="size[1]" size="normal" @click="setSize(p, 1)" type="primary">P</van-button>
-                    <van-button round :color="size[2]" size="normal" @click="setSize(m, 2)" type="primary">M</van-button>
-                    <van-button round :color="size[3]" size="normal" @click="setSize(g, 3)" type="primary">G</van-button>
-                </div>
                 <div class="ingredients_form">
                     <div class="ingredients_form_item">
                         <p>Café</p>
@@ -34,12 +26,12 @@
                     <div class="ingredients_form_item">
                         <p>Chocolate</p>
                         <p class="unit_Measurement">{{chocolate.quantity}}<span>g</span></p>
-                        <van-slider @change="setValue(); unsetSize();" v-model="chocolate.quantity" :min="0" :step="2" :max="90"/>
+                        <van-slider @change="setValue(); unsetSize();" v-model="chocolate.quantity" :min="0" :step="2" :max="chocolate.max"/>
                     </div>
                     <div class="ingredients_form_item">
                         <p>Chantilly</p>
                         <p class="unit_Measurement">{{chantilly.quantity}}<span>ml</span></p>
-                        <van-slider @change="setValue();  unsetSize();" v-model="chantilly.quantity" :min="0" :max="82"/>
+                        <van-slider @change="setValue();  unsetSize();" v-model="chantilly.quantity" :min="0" :max="chantilly.max"/>
                     </div>
                     <div class="ingredients_form_item">
                         <p>Açúcar</p>
@@ -87,11 +79,13 @@
                 },
                 chocolate: {
                     quantity: 32,
-                    price: 0.0505
+                    price: 0.0505,
+                    max: 40
                 },
                 chantilly:{
                     quantity: 25,
-                    price: 0.025
+                    price: 0.025,
+                    max: 32
                 },
                 acucar: {
                     quantity: 1,
@@ -115,11 +109,13 @@
                     },
                     chocolate: {
                         quantity: 32,
-                        price: 0.0505
+                        price: 0.0505,
+                        max:40
                     },
                     chantilly:{
                         quantity: 25,
-                        price: 0.025
+                        price: 0.025,
+                        max: 32
                     },
                     acucar: {
                         quantity: 1,
@@ -257,17 +253,28 @@
                         this.cafe.selected[1] = '#8e7e6d'
                         this.cafe.selected[2] = '#c7b199'
                         this.cafe.selected[3] = '#c7b199'
-                        
+                        this.chocolate.quantity = 32
+                        this.chocolate.max = 40
+                        this.chantilly.quantity = 25
+                        this.chantilly.max = 32
                         break;
                     case 2:
                         this.cafe.selected[1] = '#c7b199'
                         this.cafe.selected[2] = '#8e7e6d'
                         this.cafe.selected[3] = '#c7b199'
+                        this.chocolate.quantity = 50
+                        this.chocolate.max = 68
+                        this.chantilly.quantity = 33
+                        this.chantilly.max = 42
                         break;
                     case 3:
                         this.cafe.selected[1] = '#c7b199'
                         this.cafe.selected[2] = '#c7b199'
                         this.cafe.selected[3] = '#8e7e6d'
+                        this.chocolate.quantity = 66
+                        this.chocolate.max = 90
+                        this.chantilly.quantity = 67
+                        this.chantilly.max = 82
                         break;
                 }
             },

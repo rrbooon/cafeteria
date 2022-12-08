@@ -25,11 +25,9 @@
                 <div class="ingredientsContent">
                     <ul>
                         <li>Massa patê sucreé</li>
-                        <li>Recheio</li>
-                        <li>Nozes</li>
-                        <li>Massa</li>
-                        <li>Recheio</li>
-                        <li>Nozes</li>
+                        <li>Recheio ninho</li>
+                        <li>Pistache</li>
+                        <li>Noz mariposa</li>
                     </ul>
                 </div>
             </div>
