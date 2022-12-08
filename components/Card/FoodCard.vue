@@ -4,7 +4,7 @@
     v-if="visible"
   >
     <div class="image">
-        <img :src="`http://localhost:1337/images/${imagePath}`" alt="">
+        <img :src="`http://192.168.63.164:1337/images/${imagePath}`" alt="">
     </div>
     <div class="caption">
         <h2>{{title}}</h2>

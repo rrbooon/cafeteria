@@ -217,7 +217,7 @@
                     2: '#c7b199',
                     3: '#c7b199'
                 },
-                newValue: 3
+                newValue: 0.79
             }
         },
         methods:{
@@ -307,6 +307,18 @@
             },
             addToCart(){
                 
+
+                if(!this.bacon.quer){
+                    this.bacon.quantity = '(sem)'
+                }
+
+                if(!this.cheddar.quer){
+                    this.cheddar.quantity = '(sem)'
+                }
+
+                if(!this.cebola.quer){
+                    this.cebola.quantity = '(sem)'
+                }
 
                 const payload ={
                     name: 'Pattymelt',

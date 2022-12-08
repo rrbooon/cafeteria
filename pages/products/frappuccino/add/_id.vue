@@ -4,9 +4,9 @@
             <van-icon name="arrow-left" />
         </div>
         <div class="image">
-            <img style="" src="/img/frappuccino/copo1Artboard_1.svg"  class="massa" alt="">
-            <img style="" src="/img/frappuccino/ganache1Artboard_1.svg"  class="recheio2" alt="">
-            <img :style="`width: 70%; top:${((chantilly.quantity/97)*82)}px`" src="/img/frappuccino/chantilly1Artboard_1.png" class="recheio" alt="">
+            <img :style="`width:${cafe.size}%;`" src="/img/frappuccino/copo1Artboard_1.svg"  class="massa" alt="">
+            <img :style="`width:${((chocolate.quantity*80)/90)}%`" src="/img/frappuccino/ganache1Artboard_1.svg"  class="recheio2" alt="">
+            <img :style="`width:${((chantilly.quantity*72)/82)}%`" src="/img/frappuccino/chantilly1Artboard_1.png" class="recheio" alt="">
         </div>
         <div class="content">
             <div class="title">
@@ -75,7 +75,8 @@
                         1: '#8e7e6d',
                         2: '#c7b199',
                         3: '#c7b199'
-                    }
+                    },
+                    size: 60
                 },
                 chocolate: {
                     quantity: 32,
@@ -257,6 +258,7 @@
                         this.chocolate.max = 40
                         this.chantilly.quantity = 25
                         this.chantilly.max = 32
+                        this.cafe.size = 60
                         break;
                     case 2:
                         this.cafe.selected[1] = '#c7b199'
@@ -266,6 +268,7 @@
                         this.chocolate.max = 68
                         this.chantilly.quantity = 33
                         this.chantilly.max = 42
+                        this.cafe.size = 70
                         break;
                     case 3:
                         this.cafe.selected[1] = '#c7b199'
@@ -275,6 +278,7 @@
                         this.chocolate.max = 90
                         this.chantilly.quantity = 67
                         this.chantilly.max = 82
+                        this.cafe.size = 80
                         break;
                 }
             },

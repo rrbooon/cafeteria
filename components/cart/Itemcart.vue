@@ -5,7 +5,9 @@
             </div>
             <div class="ingredientes_cart">
                 <p v-for="(opcional, index) in data.opitions" :key="index">
-                  {{opcional.name}}: {{opcional.quantity}}{{opcional.unity}}
+                  {{opcional.name}}: {{opcional.quantity.toLocaleString('pt-br', {
+                        maximumFractionDigits: 2
+                    })}}{{opcional.unity}}
                 </p>
             </div>
             <div class="deletar_cart" @click="deleteItem(data.id)">
