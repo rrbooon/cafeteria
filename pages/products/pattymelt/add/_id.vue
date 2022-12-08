@@ -28,17 +28,16 @@
                 <div class="ingredients_form">
                     <div class="ingredients_form_item">
                         <p>Pão</p>
-                        <p class="unit_Measurement">{{pao.quantity}}<span>ml</span></p>
                         <div class="default_options">
-                            <van-button round :color="pao.selected[1]" size="normal" @click="setCafe('p', 0.30, 1)" type="primary">P</van-button>
-                            <van-button round :color="pao.selected[2]" size="normal" @click="setCafe('m', 0.50, 2)" type="primary">M</van-button>
-                            <van-button round :color="pao.selected[3]" size="normal" @click="setCafe('g', 1.20, 3)" type="primary">G</van-button>
+                            <van-button round :color="pao.selected[1]" size="normal" @click="setCafe('p', 1, p)" type="primary">P</van-button>
+                            <van-button round :color="pao.selected[2]" size="normal" @click="setCafe('m', 2, m)" type="primary">M</van-button>
+                            <van-button round :color="pao.selected[3]" size="normal" @click="setCafe('g', 3, g)" type="primary">G</van-button>
                         </div>
                     </div>
                     <div class="ingredients_form_item">
                         <p>Recheio</p>
                         <p class="unit_Measurement">{{recheio.quantity}}<span>g</span></p>
-                        <van-slider @change="setValue(); unsetSize();" v-model="recheio.quantity" :min="0" :step="2" :max="90"/>
+                        <van-slider @change="setValue(); unsetSize();" v-model="recheio.quantity" :min="0" :step="2" :max="recheio.max"/>
                     </div>
                     <div class="ingredients_form_item">
                         <p>Bacon</p>
@@ -153,22 +152,22 @@
                     recheio: {
                         quantity: 14,
                         price: 0.0505,
-                        max: 20
+                        max: 32
                     },
                     bacon: {
                         quantity: 14,
                         price: 0.03,
-                        max: 20
+                        max: 32
                     },
                     cheddar:{
                         quantity: 14,
                         price: 0.018,
-                        max: 20
+                        max: 32
                     },
                     cebola: {
                         quantity: 14,
                         price: 0.005,
-                        max: 20
+                        max: 32
                     },
                 },
                 g:{
@@ -184,22 +183,22 @@
                     recheio: {
                         quantity: 14,
                         price: 0.0505,
-                        max: 20
+                        max: 90
                     },
                     bacon: {
                         quantity: 14,
                         price: 0.03,
-                        max: 20
+                        max: 90
                     },
                     cheddar:{
                         quantity: 14,
                         price: 0.018,
-                        max: 20
+                        max: 90
                     },
                     cebola: {
                         quantity: 14,
                         price: 0.005,
-                        max: 20
+                        max: 90
                     },
                 },
                 size:{
@@ -252,34 +251,32 @@
                 this.size[3] = '#c7b199'
             },
             setValue(){
-                const cafePrice = this.cafe.price
-                const chocolatePrice = (this.chocolate.quantity * this.chocolate.price)
-                const chantillyPrice = (this.chantilly.quantity * this.chantilly.price)
-                const acucarPrice = this.acucar.price
+                this.bacon
 
                 this.newValue = cafePrice + chocolatePrice + chantillyPrice + acucarPrice
             },
-            setCafe(quantity, price, selected){
-                this.cafe.quantity = quantity
-                this.cafe.price = price   
-                this.setValue()
+            setCafe(quantity, selected, data){
+                this.recheio.quantity = quantity   
+                //this.setValue()
 
                 switch (selected) {
                     case 1:
-                        this.cafe.selected[1] = '#8e7e6d'
-                        this.cafe.selected[2] = '#c7b199'
-                        this.cafe.selected[3] = '#c7b199'
-                        
+                        this.pao.selected[1] = '#8e7e6d'
+                        this.pao.selected[2] = '#c7b199'
+                        this.pao.selected[3] = '#c7b199'
+                        this.recheio = data.recheio
                         break;
                     case 2:
-                        this.cafe.selected[1] = '#c7b199'
-                        this.cafe.selected[2] = '#8e7e6d'
-                        this.cafe.selected[3] = '#c7b199'
+                        this.pao.selected[1] = '#c7b199'
+                        this.pao.selected[2] = '#8e7e6d'
+                        this.pao.selected[3] = '#c7b199'
+                        this.recheio = data.recheio
                         break;
                     case 3:
-                        this.cafe.selected[1] = '#c7b199'
-                        this.cafe.selected[2] = '#c7b199'
-                        this.cafe.selected[3] = '#8e7e6d'
+                        this.pao.selected[1] = '#c7b199'
+                        this.pao.selected[2] = '#c7b199'
+                        this.pao.selected[3] = '#8e7e6d'
+                        this.recheio = data.recheio
                         break;
                 }
             },
