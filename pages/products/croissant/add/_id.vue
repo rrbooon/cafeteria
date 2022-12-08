@@ -76,11 +76,11 @@
                     step: 10
                 },
                 nozes:{
-                    quantity: 60,
+                    quantity: 16,
                     price: 0.081,
-                    min: 50,
-                    max: 70,
-                    step: 10
+                    min: 12,
+                    max: 20,
+                    step: 4
                 },
                 p:{
                     massa: {
@@ -98,11 +98,11 @@
                         step: 10
                     },
                     nozes:{
-                        quantity: 60,
-                        price: 0.055,
-                        min: 50,
-                        max: 70,
-                        step: 10
+                        quantity: 16,
+                        price: 0.081,
+                        min: 12,
+                        max: 20,
+                        step: 4
                     },
                 },
                 m:{
@@ -121,11 +121,11 @@
                         step: 12
                     },
                     nozes:{
-                        quantity: 72,
-                        price: 0.055,
-                        min: 60,
-                        max: 84,
-                        step: 12
+                        quantity: 20,
+                        price:0.081,
+                        min: 16,
+                        max: 24,
+                        step: 4
                     },
                 },
                 g:{
@@ -144,11 +144,11 @@
                         step: 14
                     },
                     nozes:{
-                        quantity: 84,
-                        price: 0.055,
-                        min: 70,
-                        max: 98,
-                        step: 14
+                        quantity: 24,
+                        price: 0.081,
+                        min: 18,
+                        max: 30,
+                        step: 6
                     },
                 },
                 size:{
@@ -227,7 +227,7 @@
                         nozes: {
                             name: 'Nozes',
                             quantity:this.recheio.quantity,
-                            unity: 'ml'                            
+                            unity: 'g'                            
                         },
                     },
                     finalValue: this.newValue

@@ -24,6 +24,9 @@
                 </div>
                 <div class="ingredientsContent">
                     <ul>
+                        <li>Massa patê sucreé</li>
+                        <li>Recheio</li>
+                        <li>Nozes</li>
                         <li>Massa</li>
                         <li>Recheio</li>
                         <li>Nozes</li>

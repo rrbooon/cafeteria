@@ -4,12 +4,12 @@
             <van-icon name="arrow-left" />
         </div>
         <div class="image">
-            <img style="" src="/img/lanche/ps.svg"  class="massa" alt="">
-            <img :style="`z-index:120; width:`" src="/img/lanche/cs.svg" v-if="cheddar.quer" class="recheio2" alt="">
-            <img :style="`z-index:119; width:`" src="/img/lanche/b.svg" v-if="bacon.quer" class="recheio2" alt="">
-            <img style="" src="/img/lanche/ca.svg"  class="recheio2" alt="">
-            <img :style="`z-index:120; width:${(())}`" src="/img/lanche/ci.svg" v-if="cheddar.quer" class="recheio2" alt="">
-            <img style="" src="/img/lanche/pi.svg"  class="recheio2" alt="">
+            <img :style="`width:${pao.size}%;`" src="/img/lanche/ps.svg"  class="massa" alt="">
+            <img :style="`z-index:120; width:${((recheio.quantity*80)/90)}%;`" src="/img/lanche/cs.svg" v-if="cheddar.quer" class="recheio2" alt="">
+            <img :style="`z-index:119; width:${((recheio.quantity*80)/90)}%;`" src="/img/lanche/b.svg" v-if="bacon.quer" class="recheio2" alt="">
+            <img :style="`width:${((recheio.quantity*80)/90)}%;`" src="/img/lanche/ca.svg"  class="recheio2" alt="">
+            <img :style="`z-index:120; width:${((recheio.quantity*80)/90)}%;`" src="/img/lanche/ci.svg" v-if="cheddar.quer" class="recheio2" alt="">
+            <img :style="`width:${pao.size}%;`" src="/img/lanche/pi.svg"  class="recheio2" alt="">
             
         </div>
         <div class="content">
@@ -42,14 +42,14 @@
                         <p>Cheddar</p>
                         <p class="unit_Measurement" v-if="cheddar.quer">{{cheddar.quantity.toLocaleString('pt-br', {
                             maximumFractionDigits: 2
-                        })}}<span>ml</span></p>
+                        })}}<span>g</span></p>
                         <van-switch v-model="cheddar.quer" active-color="#c7b199" inactive-color="#dcdee0" />
                     </div>
                     <div class="ingredients_form_item">
                         <p>Cebola</p>
                         <p class="unit_Measurement" v-if="cebola.quer">{{cebola.quantity.toLocaleString('pt-br', {
                             maximumFractionDigits: 2
-                        })}}<span>ml</span></p>
+                        })}}<span>g</span></p>
                         <van-switch v-model="cebola.quer" active-color="#c7b199" inactive-color="#dcdee0" />
                     </div>
                 </div>
@@ -84,7 +84,8 @@
                         1: '#8e7e6d',
                         2: '#c7b199',
                         3: '#c7b199'
-                    }
+                    },
+                    size: 15
                 },
                 recheio: {
                     quantity: 14,
@@ -277,18 +278,21 @@
                         this.pao = data.pao
                         this.recheio.quantity = data.recheio.quantity
                         this.recheio.max = data.recheio.max
+                        this.pao.size = 15
                         this.setRecheio()
                         break;
                     case 2:
                         this.pao = data.pao
                         this.recheio.quantity = data.recheio.quantity
                         this.recheio.max = data.recheio.max
+                        this.pao.size = 32
                         this.setRecheio()
                         break;
                     case 3:
                         this.pao = data.pao
                         this.recheio.quantity = data.recheio.quantity
                         this.recheio.max = data.recheio.max
+                        this.pao.size = 80
                         this.setRecheio()
                         break;
                 }
@@ -305,27 +309,32 @@
                 
 
                 const payload ={
-                    name: 'Frappuccino',
+                    name: 'Pattymelt',
                     opitions: {
-                        cafe: {
-                            name: 'Café',
-                            quantity:this.cafe.quantity,
-                            unity: 'ml'                            
+                        pao:{
+                            name: "Pão",
+                            quantity: this.pao.quantity,
+                            unity: ''
                         },
-                        chocolate: {
-                            name: 'Chocolate',
-                            quantity:this.chocolate.quantity,
+                        recheio: {
+                            name: 'Recheio',
+                            quantity:this.recheio.quantity,
                             unity: 'g'                            
                         },
-                        chantilly: {
-                            name: 'Chantilly',
-                            quantity:this.chantilly.quantity,
-                            unity: 'ml'                            
+                        bacon: {
+                            name: 'Bacon',
+                            quantity:this.bacon.quantity,
+                            unity: 'g'                            
                         },
-                        acucar: {
-                            name: 'Açúcar',
-                            quantity:this.acucar.quantity,
-                            unity: 'clh'                            
+                        cheddar: {
+                            name: 'Cheddar',
+                            quantity:this.cheddar.quantity,
+                            unity: 'g'                            
+                        },
+                        cebola: {
+                            name: 'Cebola',
+                            quantity:this.cebola.quantity,
+                            unity: 'g'                            
                         },
                     },
                     finalValue: this.newValue
